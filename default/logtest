@@ -1,0 +1,374 @@
+
+Processing write_rawy.C...
+pt bin: 1-5, pt range: 0-0.5
+ cent : 0-10%(class G__CINT_ENDL)140339101883056
+
+Processing write_rawy.C...
+pt bin: 1-5, pt range: 0-0.5
+ cent : 0-10%
+axis 0 : 8 9
+axis 1 : 1 5
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.0994701
+pt bin: 6-10, pt range: 0.5-1
+ cent : 0-10%
+axis 0 : 8 9
+axis 1 : 6 10
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.100055
+pt bin: 11-15, pt range: 1-1.5
+ cent : 0-10%
+axis 0 : 8 9
+axis 1 : 11 15
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.101309
+pt bin: 16-20, pt range: 1.5-2
+ cent : 0-10%
+axis 0 : 8 9
+axis 1 : 16 20
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.101872
+pt bin: 21-25, pt range: 2-2.5
+ cent : 0-10%
+axis 0 : 8 9
+axis 1 : 21 25
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.103313
+pt bin: 26-30, pt range: 2.5-3
+ cent : 0-10%
+axis 0 : 8 9
+axis 1 : 26 30
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.10664
+pt bin: 31-35, pt range: 3-3.5
+ cent : 0-10%
+axis 0 : 8 9
+axis 1 : 31 35
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.10816
+pt bin: 36-40, pt range: 3.5-4
+ cent : 0-10%
+axis 0 : 8 9
+axis 1 : 36 40
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.109806
+pt bin: 41-50, pt range: 4-5
+ cent : 0-10%
+axis 0 : 8 9
+axis 1 : 41 50
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.131094
+pt bin: 51-60, pt range: 5-6
+ cent : 0-10%
+axis 0 : 8 9
+axis 1 : 51 60
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.132015
+pt bin: 61-70, pt range: 6-7
+ cent : 0-10%
+axis 0 : 8 9
+axis 1 : 61 70
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.139583
+pt bin: 71-80, pt range: 7-8
+ cent : 0-10%
+axis 0 : 8 9
+axis 1 : 71 80
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.161289
+pt bin: 81-100, pt range: 8-10
+ cent : 0-10%
+axis 0 : 8 9
+axis 1 : 81 100
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.180257
+0-10%, cent bin: 8-9
+pt bin: 1-5, pt range: 0-0.5
+ cent : 10-40%
+axis 0 : 5 7
+axis 1 : 1 5
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.0997092
+pt bin: 6-10, pt range: 0.5-1
+ cent : 10-40%
+axis 0 : 5 7
+axis 1 : 6 10
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.100211
+pt bin: 11-15, pt range: 1-1.5
+ cent : 10-40%
+axis 0 : 5 7
+axis 1 : 11 15
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.102493
+pt bin: 16-20, pt range: 1.5-2
+ cent : 10-40%
+axis 0 : 5 7
+axis 1 : 16 20
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.103676
+pt bin: 21-25, pt range: 2-2.5
+ cent : 10-40%
+axis 0 : 5 7
+axis 1 : 21 25
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.106584
+pt bin: 26-30, pt range: 2.5-3
+ cent : 10-40%
+axis 0 : 5 7
+axis 1 : 26 30
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.109978
+pt bin: 31-35, pt range: 3-3.5
+ cent : 10-40%
+axis 0 : 5 7
+axis 1 : 31 35
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.115823
+pt bin: 36-40, pt range: 3.5-4
+ cent : 10-40%
+axis 0 : 5 7
+axis 1 : 36 40
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.127312
+pt bin: 41-50, pt range: 4-5
+ cent : 10-40%
+axis 0 : 5 7
+axis 1 : 41 50
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.147974
+pt bin: 51-60, pt range: 5-6
+ cent : 10-40%
+axis 0 : 5 7
+axis 1 : 51 60
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.161721
+pt bin: 61-70, pt range: 6-7
+ cent : 10-40%
+axis 0 : 5 7
+axis 1 : 61 70
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.211499
+pt bin: 71-80, pt range: 7-8
+ cent : 10-40%
+axis 0 : 5 7
+axis 1 : 71 80
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.300322
+pt bin: 81-100, pt range: 8-10
+ cent : 10-40%
+axis 0 : 5 7
+axis 1 : 81 100
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.13782
+10-40%, cent bin: 5-7
+pt bin: 1-5, pt range: 0-0.5
+ cent : 40-80%
+axis 0 : 1 4
+axis 1 : 1 5
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.0978224
+pt bin: 6-10, pt range: 0.5-1
+ cent : 40-80%
+axis 0 : 1 4
+axis 1 : 6 10
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.0999908
+pt bin: 11-15, pt range: 1-1.5
+ cent : 40-80%
+axis 0 : 1 4
+axis 1 : 11 15
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.111039
+pt bin: 16-20, pt range: 1.5-2
+ cent : 40-80%
+axis 0 : 1 4
+axis 1 : 16 20
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.112092
+pt bin: 21-25, pt range: 2-2.5
+ cent : 40-80%
+axis 0 : 1 4
+axis 1 : 21 25
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.123971
+pt bin: 26-30, pt range: 2.5-3
+ cent : 40-80%
+axis 0 : 1 4
+axis 1 : 26 30
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.129557
+pt bin: 31-35, pt range: 3-3.5
+ cent : 40-80%
+axis 0 : 1 4
+axis 1 : 31 35
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.197971
+pt bin: 36-40, pt range: 3.5-4
+ cent : 40-80%
+axis 0 : 1 4
+axis 1 : 36 40
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.233332
+pt bin: 41-50, pt range: 4-5
+ cent : 40-80%
+axis 0 : 1 4
+axis 1 : 41 50
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.32322
+pt bin: 51-60, pt range: 5-6
+ cent : 40-80%
+axis 0 : 1 4
+axis 1 : 51 60
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.347705
+pt bin: 61-70, pt range: 6-7
+ cent : 40-80%
+axis 0 : 1 4
+axis 1 : 61 70
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.641391
+pt bin: 71-80, pt range: 7-8
+ cent : 40-80%
+axis 0 : 1 4
+axis 1 : 71 80
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=1.77644
+pt bin: 81-100, pt range: 8-10
+ cent : 40-80%
+axis 0 : 1 4
+axis 1 : 81 100
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=2.38736
+40-80%, cent bin: 1-4
+pt bin: 1-5, pt range: 0-0.5
+ cent : 0-80%
+axis 0 : 1 9
+axis 1 : 1 5
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.0995314
+pt bin: 6-10, pt range: 0.5-1
+ cent : 0-80%
+axis 0 : 1 9
+axis 1 : 6 10
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.100127
+pt bin: 11-15, pt range: 1-1.5
+ cent : 0-80%
+axis 0 : 1 9
+axis 1 : 11 15
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.102114
+pt bin: 16-20, pt range: 1.5-2
+ cent : 0-80%
+axis 0 : 1 9
+axis 1 : 16 20
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.10297
+pt bin: 21-25, pt range: 2-2.5
+ cent : 0-80%
+axis 0 : 1 9
+axis 1 : 21 25
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.105269
+pt bin: 26-30, pt range: 2.5-3
+ cent : 0-80%
+axis 0 : 1 9
+axis 1 : 26 30
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.10863
+pt bin: 31-35, pt range: 3-3.5
+ cent : 0-80%
+axis 0 : 1 9
+axis 1 : 31 35
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.113571
+pt bin: 36-40, pt range: 3.5-4
+ cent : 0-80%
+axis 0 : 1 9
+axis 1 : 36 40
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.120745
+pt bin: 41-50, pt range: 4-5
+ cent : 0-80%
+axis 0 : 1 9
+axis 1 : 41 50
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.143491
+pt bin: 51-60, pt range: 5-6
+ cent : 0-80%
+axis 0 : 1 9
+axis 1 : 51 60
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.153675
+pt bin: 61-70, pt range: 6-7
+ cent : 0-80%
+axis 0 : 1 9
+axis 1 : 61 70
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.195177
+pt bin: 71-80, pt range: 7-8
+ cent : 0-80%
+axis 0 : 1 9
+axis 1 : 71 80
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.3007
+pt bin: 81-100, pt range: 8-10
+ cent : 0-80%
+axis 0 : 1 9
+axis 1 : 81 100
+axis 2 : 4 11
+axis 4 : 4 11
+norm.=0.203151
+0-80%, cent bin: 1-9
