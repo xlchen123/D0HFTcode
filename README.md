@@ -20,6 +20,7 @@ All Rights Reserved !
 
 ###How to use this code:  
 ```bash
+NOTE: the mixdata root file "D0_data_mix.root" was not here since the limit of Github file size
 
 1. How to run (after copy the full files), if run on PDSF/RCF: starver SL16d ==> simplify printed things...
 ./run.sh
