@@ -9,8 +9,8 @@ This code was original for Our STAR HFT D0 analysis
 All Rights Reserved !
 
 ###Code Authors:  
-[Guannan Xie](https://github.com/GuannanXie) (guannanxie@lbl.gov)  
 [Xiaolong Chen](https://github.com/xlchen123) (xlchen@lbl.gov)  
+[Guannan Xie](https://github.com/GuannanXie) (xieguannanpp@gmail.com)  
 - - -
 ### Presentations:  
 #### STAR Protected:  
