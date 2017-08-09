@@ -1,7 +1,8 @@
 #include "../myFunction.h"
 #include "../anaCuts.h"
 
-std::pair<float, float> gMassExclusionRange(1.80, 1.92);
+// std::pair<float, float> gMassExclusionRange(1.80, 1.92);
+std::pair<float, float> gMassExclusionRange(1.82, 1.90);
 //std::pair<float, float> gMassYieldCountRange(1.82, 1.91);
 //std::pair<float, float> gMassYieldSideBand1(1.71, 1.80);
 //std::pair<float, float> gMassYieldSideBand2(1.93, 2.02);
@@ -94,9 +95,10 @@ void plot_rawy()
     //resifunFit->SetLineStyle(7);
     resifunFit->SetLineWidth(2);
     fD0->SetParNames("N","#mu","#sigma","BinWidth","A0","A1");
-    float fitRange_lw = 1.72;
-    // float fitRange_lw = 1.6;
-    float fitRange_up = 2.1;
+    // float fitRange_lw = 1.72;
+    float fitRange_lw = 1.76;
+    // float fitRange_up = 2.1;
+    float fitRange_up = 2.0;
     
     for(int icent=0; icent<ncent; icent++) {
 // if(icent != 0) continue;
