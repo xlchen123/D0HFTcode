@@ -129,7 +129,8 @@ void plot_rawy()
             sprintf(name,"%s/hInvMassMixUL_%i_%i",nameCent1[icent],icent,ipt);
             hInvMassMixUL[ipt] = (TH1F*)fin->Get(name);
             hInvMassMixUL[ipt]->SetDirectory(0);
-            sprintf(name,"%s/hInvMassMix_%i_%i",nameCent1[icent],icent,ipt);
+            // sprintf(name,"%s/hInvMassMix_%i_%i",nameCent1[icent],icent,ipt);
+            sprintf(name,"%s/hInvMass_%i_%i",nameCent1[icent],icent,ipt);
             hInvMass[ipt] = (TH1F*)fin->Get(name);
             hInvMass[ipt]->SetDirectory(0);
         }
@@ -277,9 +278,9 @@ void plot_rawy()
             legend->SetTextSize(0.05);
             legend->SetBorderSize(0);
             legend->SetFillStyle(0);
-            legend->AddEntry(hInvMass[ipt]," US (SE) - US (ME)","lep");
+            // legend->AddEntry(hInvMass[ipt]," US (SE) - US (ME)","lep");
+            legend->AddEntry(hInvMass[ipt]," Unlike - Like","lep");
             legend->AddEntry(fD0," Fit","l");
-            //legend2->AddEntry(hInvMass[ipt]," Unlike - Like","lep");
             legend->Draw();
             
             sprintf(name,"%s/cent%s_pt_%.1f_%.1f.gif",dir,nameCent1[icent],nptbin[ipt],nptbin[ipt+1]);
