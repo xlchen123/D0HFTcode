@@ -214,7 +214,7 @@ void plot_rawy()
             // fD0->FixParameter(4,resifunFit->GetParameter(0));
             // fD0->FixParameter(5,resifunFit->GetParameter(1));
             hInvMass[ipt]->Fit(fD0,"INOR","",fitRange_lw, fitRange_up);
-            // hInvMass[ipt]->Fit(fD0,"INOR","",fitRange_lw, fitRange_up);
+            hInvMass[ipt]->Fit(fD0,"INOR","",fitRange_lw, fitRange_up);
             //hInvMass[ipt]->Fit(fD0,"INOR","",fitRange_lw, fitRange_up);
             
             // caculate significance
