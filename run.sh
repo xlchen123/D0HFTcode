@@ -7,6 +7,14 @@ cd ../fit # raw yield from gaus+pol1 fit method
 rm -rf pic data
 bash run.sh
 
+cd ../fitRange # raw yield from gaus+pol1 fit method, fit range was changed
+rm -rf pic data
+bash run.sh
+
+cd ../likeSign # raw yield from sameEvent likeSign background subtraction
+rm -rf pic data
+bash run.sh
+
 cd ../ptCut1  # pT>0.6 ==> pT>0.3
 rm -rf pic data
 bash run.sh
