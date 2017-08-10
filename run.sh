@@ -54,6 +54,7 @@ root -b -q plot_err.C
 
 cd ../ptShift  # do pT shift
 root -b -q doPtShift.C
+root -b -q plot_spectra.C
 
 cd ../RAA
 rm -rf pic
