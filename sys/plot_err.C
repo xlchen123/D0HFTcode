@@ -18,8 +18,11 @@ void plot_err() {
     // const int nerr = 6;
     // const char nameErr[nerr][250] = {"TPC track", "raw yield extract", "single track p_{T}", "50% topo. eff.", "150% topo. eff.", "double count"};
     //
-    const int nerr = 7;
-    const char nameErr[nerr][250] = {"TPC track", "raw yield extract", "single track p_{T}1","single track p_{T}2", "50% topo. eff.", "150% topo. eff.", "double count"};
+    // const int nerr = 7;
+    // const char nameErr[nerr][250] = {"TPC track", "raw yield extract", "single track p_{T}1","single track p_{T}2", "50% topo. eff.", "150% topo. eff.", "double count"};
+    
+    const int nerr = 5;
+    const char nameErr[nerr][250] = {"TPC track", "raw yield extract", "single track p_{T}", "50%/150% topo. eff.", "double count"};
     
     float pt_mean[npt], pt_err[npt];
     for(int i=0; i<npt; i++) {
@@ -29,8 +32,13 @@ void plot_err() {
     
     // read sys err
     ifstream in;
-    float tmp, systmp, ytmp;
+    float systmp, ytmp;
     float sys[ncent][nerr][npt];
+    float y[npt], yerr[npt], ysys[npt];
+    float tmp[npt];
+    float tmp1[npt];
+    float tmp2[npt];
+    float tmp3[npt];
     for(int icent=0; icent<ncent; icent++) {
         int ierr = 0;
         
@@ -41,62 +49,104 @@ void plot_err() {
         }
         ierr++;
         
-        //sys 2 -- count with fit
+        //sys 2 
+        //-- 2.1 count with fit
         in.open(Form("../fit/data/yieldSys_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
-            in >> ytmp >> systmp;
-            sys[icent][ierr][ipt] = systmp;
+            in >> y[ipt] >> tmp1[ipt];
         }
         in.close();
-        ierr++;
         
-        //sys 3 -- daughter pt cut1
+        //-- 2.2 count with fit change fit range
+        in.open(Form("../fitRange/data/yieldSys_%s.txt",nameCent1[icent]));
+        for(int ipt=0; ipt<npt; ipt++) {
+            if(in.eof()) break;
+            in >> y[ipt] >> tmp2[ipt];
+        }
+        in.close();
+
+        //-- 2.3 count with likesign bkg subtraction
+        in.open(Form("../likeSign/data/yieldSys_%s.txt",nameCent1[icent]));
+        for(int ipt=0; ipt<npt; ipt++) {
+            if(in.eof()) break;
+            in >> y[ipt] >> tmp3[ipt];
+        }
+        in.close();
+
+        for(int ipt=0; ipt<npt; ipt++) {
+          tmp[ipt] = tmp1[ipt] > tmp2[ipt] ? tmp1[ipt] : tmp2[ipt];
+          tmp[ipt] = tmp[ipt] > tmp3[ipt] ? tmp[ipt] : tmp3[ipt];
+          // ysys[ipt] = sqrt(pow(tmp[ipt],2)+pow(ysys[ipt],2));
+        }
+
+        for(int ipt=0; ipt<npt; ipt++) {
+          sys[icent][ierr][ipt] = tmp[ipt];
+        }
+        ierr++;
+
+        //sys 3, Daughter pt Cut scan // choose the maximum difference
+        //sys 3.1 -- daughter pt cut1
         in.open(Form("../ptCut1/data/yieldSys_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
-            in >> ytmp >> systmp;
-            sys[icent][ierr][ipt] = systmp;
+            in >> y[ipt] >> tmp1[ipt];
         }
         in.close();
-        ierr++;
         
         //sys 3.2 -- daughter pt cut2
         in.open(Form("../ptCut2/data/yieldSys_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
-            in >> ytmp >> systmp;
-            sys[icent][ierr][ipt] = systmp;
+            in >> y[ipt] >> tmp2[ipt];
         }
         in.close();
+
+        for(int ipt=0; ipt<npt; ipt++) {
+          tmp[ipt] = tmp1[ipt] > tmp2[ipt] ? tmp1[ipt] : tmp2[ipt];
+          // ysys[ipt] = sqrt(pow(tmp[ipt],2)+pow(ysys[ipt],2));
+        }
+
+        for(int ipt=0; ipt<npt; ipt++) {
+          sys[icent][ierr][ipt] = tmp[ipt];
+        }
         ierr++;
+
         
-        //sys 4 -- tight topo cuts
+        //sys 4 topological cut
+        //4.1 -- tight topo cuts
         in.open(Form("../topoCut1/data/yieldSys_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
-            in >> ytmp >> systmp;
-            sys[icent][ierr][ipt] = systmp;
+            in >> y[ipt] >> tmp1[ipt];
         }
         in.close();
-        ierr++;
         
-        //sys 5 -- loose topo cuts
+        //4.2 -- loose topo cuts
         in.open(Form("../topoCut2/data/yieldSys_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
-            in >> ytmp >> systmp;
-            sys[icent][ierr][ipt] = systmp;
+            in >> y[ipt] >> tmp2[ipt];
         }
         in.close();
-        ierr++;
         
-        //sys 6 -- double count
+        for(int ipt=0; ipt<npt; ipt++) {
+          tmp[ipt] = tmp1[ipt] > tmp2[ipt] ? tmp1[ipt] : tmp2[ipt];
+          // ysys[ipt] = sqrt(pow(tmp[ipt],2)+pow(ysys[ipt],2));
+        }
+        
+        for(int ipt=0; ipt<npt; ipt++) {
+          sys[icent][ierr][ipt] = tmp[ipt];
+        }
+        ierr++;
+
+        //sys 5 -- double count
         in.open(Form("../DoubleCount/data/yieldSys_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             float errtmp;
-            in >> ytmp >> errtmp >> systmp >> tmp;
+            float tmptmp;
+            in >> ytmp >> errtmp >> systmp >> tmptmp;
             sys[icent][ierr][ipt] = systmp;
         }
         in.close();

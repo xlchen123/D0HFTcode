@@ -21,7 +21,10 @@ void write_err() {
     
     //caculate err
     float y[npt], yerr[npt], ysys[npt];
-    float tmp;
+    float tmp[npt];
+    float tmp1[npt];
+    float tmp2[npt];
+    float tmp3[npt];
     ifstream in;
     ofstream out;
     TFile* fout = new TFile("D0_Spectra_Run14_HFT_beforePtShift.root","RECREATE");
@@ -51,21 +54,44 @@ void write_err() {
             //ysys[ipt] = sqrt(pow(0.04,2)+pow(ysys[ipt],2));
         }
         
-        //sys 2 -- count with fit
+        //sys 2 
+        //-- 2.1 count with fit
         in.open(Form("../fit/data/yieldSys_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
-            in >> y[ipt] >> tmp;
-            ysys[ipt] = sqrt(pow(tmp,2)+pow(ysys[ipt],2));
+            in >> y[ipt] >> tmp1[ipt];
+            // ysys[ipt] = sqrt(pow(tmp,2)+pow(ysys[ipt],2));
         }
         in.close();
         
+        //-- 2.2 count with fit change fit range
+        in.open(Form("../fitRange/data/yieldSys_%s.txt",nameCent1[icent]));
+        for(int ipt=0; ipt<npt; ipt++) {
+            if(in.eof()) break;
+            in >> y[ipt] >> tmp2[ipt];
+        }
+        in.close();
+
+        //-- 2.3 count with likesign bkg subtraction
+        in.open(Form("../likeSign/data/yieldSys_%s.txt",nameCent1[icent]));
+        for(int ipt=0; ipt<npt; ipt++) {
+            if(in.eof()) break;
+            in >> y[ipt] >> tmp3[ipt];
+        }
+        in.close();
+
+        for(int ipt=0; ipt<npt; ipt++) {
+          tmp[ipt] = tmp1[ipt] > tmp2[ipt] ? tmp1[ipt] : tmp2[ipt];
+          tmp[ipt] = tmp[ipt] > tmp3[ipt] ? tmp[ipt] : tmp3[ipt];
+          ysys[ipt] = sqrt(pow(tmp[ipt],2)+pow(ysys[ipt],2));
+        }
+
+        //sys 3, Daughter pt Cut scan // choose the maximum difference
         //sys 3.1 -- daughter pt cut1
         in.open(Form("../ptCut1/data/yieldSys_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
-            in >> y[ipt] >> tmp;
-            ysys[ipt] = sqrt(pow(tmp,2)+pow(ysys[ipt],2));
+            in >> y[ipt] >> tmp1[ipt];
         }
         in.close();
         
@@ -73,36 +99,43 @@ void write_err() {
         in.open(Form("../ptCut2/data/yieldSys_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
-            in >> y[ipt] >> tmp;
-            ysys[ipt] = sqrt(pow(tmp,2)+pow(ysys[ipt],2));
+            in >> y[ipt] >> tmp2[ipt];
         }
         in.close();
+
+        for(int ipt=0; ipt<npt; ipt++) {
+          tmp[ipt] = tmp1[ipt] > tmp2[ipt] ? tmp1[ipt] : tmp2[ipt];
+          ysys[ipt] = sqrt(pow(tmp[ipt],2)+pow(ysys[ipt],2));
+        }
         
-        //sys 4 -- tight topo cuts
+        //sys 4 topological cut
+        //4.1 -- tight topo cuts
         in.open(Form("../topoCut1/data/yieldSys_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
-            in >> y[ipt] >> tmp;
-            ysys[ipt] = sqrt(pow(tmp,2)+pow(ysys[ipt],2));
+            in >> y[ipt] >> tmp1[ipt];
         }
         in.close();
         
-        //sys 5 -- loose topo cuts
+        //4.2 -- loose topo cuts
         in.open(Form("../topoCut2/data/yieldSys_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
-            in >> y[ipt] >> tmp;
-            ysys[ipt] = sqrt(pow(tmp,2)+pow(ysys[ipt],2));
+            in >> y[ipt] >> tmp2[ipt];
         }
         in.close();
         
-        //sys 6 -- double count
+        for(int ipt=0; ipt<npt; ipt++) {
+          tmp[ipt] = tmp1[ipt] > tmp2[ipt] ? tmp1[ipt] : tmp2[ipt];
+          ysys[ipt] = sqrt(pow(tmp[ipt],2)+pow(ysys[ipt],2));
+        }
+        
+        //sys 5 -- double count
         in.open(Form("../DoubleCount/data/yieldSys_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
-            float tmp1;
-            in >> y[ipt] >> yerr[ipt] >> tmp >> tmp1;
-            ysys[ipt] = sqrt(pow(tmp,2)+pow(ysys[ipt],2));
+            in >> y[ipt] >> yerr[ipt] >> tmp[ipt] >> tmp1[ipt];
+            ysys[ipt] = sqrt(pow(tmp[ipt],2)+pow(ysys[ipt],2));
             yerr[ipt] /= y[ipt];
         }
         in.close();
