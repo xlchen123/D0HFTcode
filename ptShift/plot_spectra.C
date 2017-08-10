@@ -89,7 +89,8 @@ void plot_spectra() {
     for(int icent=0; icent<ncent; icent++) {
         //legend1->AddEntry(gD0err_xl[icent],Form("%s [#times%.1f]", nameCent[icent],scale[icent]),"p");
         legend1->AddEntry(gD0err_xl[icent],nameCent1[icent],"p");
-        if( icent !=2 ) fLevy[icent]->Draw("same");
+        // if( icent !=2 ) fLevy[icent]->Draw("same");
+        fLevy[icent]->Draw("same");
         gD0err_xl[icent]->Draw("psame");
         //draw systematic error
         const float sysw = 0.15;
