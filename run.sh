@@ -15,11 +15,23 @@ cd ../likeSign # raw yield from sameEvent likeSign background subtraction
 rm -rf pic data
 bash run.sh
 
+cd ../default
+root -b -q re_get_yield.C # re calculate the yield for some pt/centrality bin
+
+cd ../fit
+root -b -q get_sys.C
+
+cd ../fitRange
+root -b -q get_sys.C
+
+cd ../likeSign
+root -b -q get_sys.C
+
 cd ../ptCut1  # pT>0.6 ==> pT>0.3
 rm -rf pic data
 bash run.sh
 
-cd ../ptCut2  # pT>0.6 ==> pT>0.3
+cd ../ptCut2  # pT>0.6 ==> pT>0.5
 rm -rf pic data
 bash run.sh
 
