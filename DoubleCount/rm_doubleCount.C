@@ -17,7 +17,8 @@ void rm_doubleCount() {
     float sys;
     gSystem->Exec("[ -d data ] || mkdir -p data");
     for(int icent=0; icent<ncent; icent++) {
-        in.open(Form("../default/data/yield_%s.txt",nameCent1[icent]));
+        // in.open(Form("../default/data/yield_%s.txt",nameCent1[icent]));
+        in.open(Form("../default/data/re_yield_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++)  {
             if(in.eof()) break;
             in >> ybase[ipt] >> yerrbase[ipt];
