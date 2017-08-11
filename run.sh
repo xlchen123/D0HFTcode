@@ -1,9 +1,9 @@
 #!/bin/bash
-cd default # raw yield from side-band method
+cd default  # raw yield from gaus+pol1 fit method
 rm -rf pic data
 bash run.sh
 
-cd ../fit # raw yield from gaus+pol1 fit method
+cd ../count  # raw yield from side-band method
 rm -rf pic data
 bash run.sh
 

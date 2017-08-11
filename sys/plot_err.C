@@ -51,7 +51,7 @@ void plot_err() {
         
         //sys 2 
         //-- 2.1 count with fit
-        in.open(Form("../fit/data/yieldSys_%s.txt",nameCent1[icent]));
+        in.open(Form("../count/data/yieldSys_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp1[ipt];
