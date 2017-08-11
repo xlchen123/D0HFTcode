@@ -210,7 +210,7 @@ void plot_rawy()
             fD0->SetParameters(N, 1.866, 0.014, hInvMass[ipt]->GetBinWidth(4),1,1);
             //fD0->SetParLimits(0,0,1.e9);
             // fD0->SetParLimits(1,1.85,1.88);
-            // fD0->SetParLimits(2,0.003,0.03);
+            fD0->SetParLimits(2,0.01,0.03);
             fD0->FixParameter(3,hInvMass[ipt]->GetBinWidth(4));
             // fD0->FixParameter(4,resifunFit->GetParameter(0));
             // fD0->FixParameter(5,resifunFit->GetParameter(1));
@@ -237,10 +237,10 @@ void plot_rawy()
             cout << hInvMass[ipt]->FindBin(lowx) << "\t" << hInvMass[ipt]->FindBin(higx) << endl;
             float bg = 0.5*(sideBand1+sideBand2);
             float bg_err = 0.5*sqrt(pow(sideBand1_err,2)+pow(sideBand2_err,2));
-            float yield = signalAndBg - bg;
-            float yielderr = sqrt(pow(signalAndBg_err,2)+pow(bg_err,2));
-            // float yield = fD0->GetParameter(0);
-            // float yielderr = fD0->GetParError(0);
+            // float yield = signalAndBg - bg;
+            // float yielderr = sqrt(pow(signalAndBg_err,2)+pow(bg_err,2));
+            float yield = fD0->GetParameter(0);
+            float yielderr = fD0->GetParError(0);
             
             rawY[ipt] = yield; rawYerr[ipt] = yielderr;
             mumean[ipt] = fD0->GetParameter(1); muerr[ipt] = fD0->GetParError(1);
