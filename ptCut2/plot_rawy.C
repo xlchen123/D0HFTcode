@@ -207,9 +207,9 @@ void plot_rawy()
             //fD0->SetParLimits(0,0,1.e9);
             fD0->SetParLimits(1,1.85,1.88);
             fD0->SetParLimits(2,0.01,0.03);
-            // fD0->FixParameter(3,hInvMass[ipt]->GetBinWidth(4));
+            fD0->FixParameter(3,hInvMass[ipt]->GetBinWidth(4));
             // fD0->FixParameter(4,resifunFit->GetParameter(0));
-            fD0->FixParameter(5,resifunFit->GetParameter(1));
+            // fD0->FixParameter(5,resifunFit->GetParameter(1));
             hInvMass[ipt]->Fit(fD0,"INOR","",fitRange_lw, fitRange_up);
             hInvMass[ipt]->Fit(fD0,"INOR","",fitRange_lw, fitRange_up);
             //hInvMass[ipt]->Fit(fD0,"INOR","",fitRange_lw, fitRange_up);

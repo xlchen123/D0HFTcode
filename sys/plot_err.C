@@ -119,6 +119,7 @@ void plot_err() {
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp1[ipt];
+            if(icent == 4 && ipt >= npt-3) tmp1[ipt] =0; // for the tight cut, the signal is not good, no need to include this sys for some certain pt bin
         }
         in.close();
         
