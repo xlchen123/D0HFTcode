@@ -18,7 +18,7 @@ bash run.sh
 cd ../default
 root -b -q re_get_yield.C # re calculate the yield for some pt/centrality bin
 
-cd ../fit
+cd ../count
 root -b -q get_sys.C
 
 cd ../fitRange
