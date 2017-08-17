@@ -64,7 +64,7 @@ root -b -q plot_RAA.C    # draw 0-10%, 10-40%, 40-80% together
 
 cd ../Rcp
 root -b -q plot_Rcp.C
-root -b -q plot_Rcp_pTshift.C
+root -b -q plot_Rcp1_pTshift.C
 root -b -q plot_Rcp2_pTshift.C
 
 #### Get TOF match eff. ###

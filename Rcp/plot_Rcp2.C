@@ -1,6 +1,6 @@
 #include "../myFunction.h"
 #include "../myConst.h"
-void plot_Rcp() {
+void plot_Rcp2() {
     globalSetting();
     char dir[250];
     char name[250];
@@ -15,10 +15,15 @@ void plot_Rcp() {
     gSystem->Exec(CMD);
     
     //change the base line--last cent bin
-    const int ncent = 5;
-    const char nameCent[ncent][250] = {"0-10%", "10-20%", "20-40%", "40-60%", "60-80%"};
-    const char nameCentXL[ncent][250] = {"0_10", "10_20", "20_40", "40_60", "60_80"};
-    float NbinMean[ncent] = {938.80170, 579.89409, 288.35051, 91.37100, 21.37396};
+    // const int ncent = 5;
+    // const char nameCent[ncent][250] = {"0-10%", "10-20%", "20-40%", "40-60%", "60-80%"};
+    // const char nameCentXL[ncent][250] = {"0_10", "10_20", "20_40", "40_60", "60_80"};
+    // float NbinMean[ncent] = {938.80170, 579.89409, 288.35051, 91.37100, 21.37396};
+    
+    const int ncent = 4;
+    const char nameCent[ncent][250] = {"0-10%", "10-20%", "20-40%", "40-80%" };
+    const char nameCentXL[ncent][250] = {"0_10", "10_20", "20_40", "40_80"};
+    float NbinMean[ncent] = {938.80170, 579.89409, 288.35051, 56.99229};
     
     // const int ncent = 4;
     // const char nameCent[ncent][250] = {"0-10%", "10-40%", "40-80%", "0-80%"};
@@ -43,7 +48,7 @@ void plot_Rcp() {
         for(int ipt=0; ipt<gD0err_xl[0]->GetN(); ipt++) {
             float y = gD0err_xl[icent]->GetY()[ipt]/NbinMean[icent];
             float yErr = gD0err_xl[icent]->GetEY()[ipt]/NbinMean[icent];
-            float base = gD0err_xl[ncent-1]->GetY()[ipt]/NbinMean[ncent-1];  //60-80%
+            float base = gD0err_xl[ncent-1]->GetY()[ipt]/NbinMean[ncent-1];  //60-80%// 40-80%
             float baseErr = gD0err_xl[ncent-1]->GetEY()[ipt]/NbinMean[ncent-1];
             // float base = gD0err_xl[ncent-2]->GetY()[ipt]/NbinMean[ncent-2];  //40-80%
             // float baseErr = gD0err_xl[ncent-2]->GetEY()[ipt]/NbinMean[ncent-2];
@@ -96,6 +101,6 @@ void plot_Rcp() {
         gD0err_xl[icent]->Draw("psame");
     }
     legend->Draw();
-    sprintf(name,"%s/D0_Rcp1.pdf",dir);
+    sprintf(name,"%s/D0_Rcp2.pdf",dir);
     c1->SaveAs(name);
 }

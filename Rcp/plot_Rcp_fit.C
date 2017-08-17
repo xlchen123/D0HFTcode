@@ -87,6 +87,6 @@ void plot_Rcp_fit() {
         gD0err_xl[icent]->Draw("psame");
     }
     legend->Draw();
-    sprintf(name,"%s/D0_Rcp_fit.pdf",dir);
+    sprintf(name,"%s/D0_Rcp1_fit.pdf",dir);
     c1->SaveAs(name);
 }

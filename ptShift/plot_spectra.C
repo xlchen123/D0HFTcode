@@ -73,8 +73,8 @@ void plot_spectra() {
     setPad(c1);
     float ymin = 5e-10;
     float ymax = 0.99e0;
-    // h0= new TH1F("","",1,0,8);
-    h0= new TH1F("","",1,0,10);
+    h0= new TH1F("","",1,0,8);
+    // h0= new TH1F("","",1,0,10);
     h0->Draw();
     h0->SetMinimum(ymin),
     h0->SetMaximum(ymax);

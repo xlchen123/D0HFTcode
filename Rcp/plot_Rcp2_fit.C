@@ -1,6 +1,6 @@
 #include "../myFunction.h"
 #include "../myConst.h"
-void plot_Rcp_pTshift() {
+void plot_Rcp2_fit() {
     globalSetting();
     char dir[250];
     char name[250];
@@ -15,10 +15,15 @@ void plot_Rcp_pTshift() {
     gSystem->Exec(CMD);
     
     //change the base line--last cent bin
-    const int ncent = 5;
-    const char nameCent[ncent][250] = {"0-10%", "10-20%", "20-40%", "40-60%", "60-80%"};
-    const char nameCentXL[ncent][250] = {"0_10", "10_20", "20_40", "40_60", "60_80"};
-    float NbinMean[ncent] = {938.80170, 579.89409, 288.35051, 91.37100, 21.37396};
+    // const int ncent = 5;
+    // const char nameCent[ncent][250] = {"0-10%", "10-20%", "20-40%", "40-60%", "60-80%"};
+    // const char nameCentXL[ncent][250] = {"0_10", "10_20", "20_40", "40_60", "60_80"};
+    // float NbinMean[ncent] = {938.80170, 579.89409, 288.35051, 91.37100, 21.37396};
+    
+    const int ncent = 4;
+    const char nameCent[ncent][250] = {"0-10%", "10-20%", "20-40%", "40-80%" };
+    const char nameCentXL[ncent][250] = {"0_10", "10_20", "20_40", "40_80"};
+    float NbinMean[ncent] = {938.80170, 579.89409, 288.35051, 56.99229};
     
     //Read spectra
     TGraphErrors* gD0err_xl[ncent];
@@ -28,7 +33,7 @@ void plot_Rcp_pTshift() {
     for(int icent=0; icent<ncent; icent++) {
         gD0err_xl[icent] = (TGraphErrors*)fin1->Get(Form("gD0_err_%s",nameCentXL[icent]));
         gD0sys_xl[icent] = (TGraphErrors*)fin1->Get(Form("gD0_sys_%s",nameCentXL[icent]));
-        //fLevy[icent] = (TF1*)fin1->Get(Form("flevy_%s",nameCentXL[icent]));
+        fLevy[icent] = (TF1*)fin1->Get(Form("flevy_%s",nameCentXL[icent]));
     }
     fin1->Close();
     
@@ -36,10 +41,11 @@ void plot_Rcp_pTshift() {
     for(int icent=0; icent<ncent; icent++) {
         cout << nameCent[icent] << endl;
         for(int ipt=0; ipt<gD0err_xl[0]->GetN(); ipt++) {
+            float pt = gD0err_xl[icent]->GetX()[ipt];
             float y = gD0err_xl[icent]->GetY()[ipt]/NbinMean[icent];
             float yErr = gD0err_xl[icent]->GetEY()[ipt]/NbinMean[icent];
-            float base = gD0err_xl[ncent-1]->GetY()[ipt]/NbinMean[ncent-1];  //60-80%
-            float baseErr = gD0err_xl[ncent-1]->GetEY()[ipt]/NbinMean[ncent-1];
+            float base = fLevy[ncent-1]->Eval(pt)/NbinMean[ncent-1];//gD0err_xl[ncent-1]->GetY()[ipt]/NbinMean[ncent-1];  //60-80%
+            float baseErr = 0;//gD0err_xl[ncent-1]->GetEY()[ipt]/NbinMean[ncent-1];
             float Rcp = y/base;
             float RcpErr = Rcp*sqrt(pow(yErr/y,2)+pow(baseErr/base,2));
             gD0err_xl[icent]->GetY()[ipt] = Rcp;
@@ -86,6 +92,6 @@ void plot_Rcp_pTshift() {
         gD0err_xl[icent]->Draw("psame");
     }
     legend->Draw();
-    sprintf(name,"%s/D0_Rcp.pdf",dir);
+    sprintf(name,"%s/D0_Rcp2_fit.pdf",dir);
     c1->SaveAs(name);
 }
