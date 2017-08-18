@@ -47,12 +47,12 @@ float Nbin_Sum[ncent] = {0};
 // double nptbin[npt+1] = {1.5, 5.0};
 //const int npt = 8;
 //double nptbin[npt+1] = {0, 1, 2, 3, 4, 5, 6, 8,  10.};
-// const int npt = 10;
-// double nptbin[npt+1] = {0, 0.5, 1., 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0, 8};
+const int npt = 10;
+double nptbin[npt+1] = {0, 0.5, 1., 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0, 8};
 // const int npt = 13;
 // double nptbin[npt+1] = { 0., 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0, 7.0, 8.0, 10 };
-const int npt = 12;
-double nptbin[npt+1] = { 0., 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0, 7.0, 8.0 };//
+// const int npt = 12;
+// double nptbin[npt+1] = { 0., 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0, 7.0, 8.0 };//
 
 //const int npt = 4;
 //double nptbin[npt+1] = {1.5, 2.5, 3.5, 5, 8};
