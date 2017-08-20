@@ -164,7 +164,7 @@ void plot_rawy()
             //drawLatex(0.15,0.9,"UnLike Sign",22,0.06,1);
             //drawLatex(0.15,0.84,"Like Sign",22,0.06,2);
             drawLatex(0.55,0.9,"STAR Au+Au @ 200 GeV",22,0.05,1);
-            drawLatex(0.55,0.81,Form("%s",nameCent[icent]),22,0.05,4);
+            drawLatex(0.55,0.81,Form("%s, D^{0} |Y| < 0.5",nameCent[icent]),22,0.05,4);
             drawLatex(0.55,0.73,Form("%.1f < p_{T} < %.1f GeV/c",nptbin[ipt],nptbin[ipt+1]),22,0.05,4);
             //drawLatex(0.55,0.64,Form("%.3f < DCA_{D^{0}} < %.3f",ndcabin[idca],ndcabin[idca+1]),22,0.06,4);
             //drawLatex(0.55,0.5,"STAR Preliminary",92,0.06,1);

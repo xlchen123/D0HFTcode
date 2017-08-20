@@ -29,7 +29,7 @@ void plot_Rcp2_pTshift()
    TGraphErrors* gD0err_xl[ncent];
    TGraphErrors* gD0sys_xl[ncent];
    TF1* fLevy[ncent];
-   TFile* fin1 = new TFile("../ptShift/D0_Spectra_Run14HFT.root");
+   TFile* fin1 = new TFile("../ptShift/D0_Spectra_Run14HFT_halfY.root");
    for (int icent = 0; icent < ncent; icent++)
    {
       gD0err_xl[icent] = (TGraphErrors*)fin1->Get(Form("gD0_err_%s", nameCentXL[icent]));
