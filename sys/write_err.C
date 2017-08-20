@@ -151,7 +151,7 @@ void write_err() {
         cout << "cent bin: " << bin_lw << "-" << bin_up << endl;
         float nevents = hcent->Integral(bin_lw,bin_up);
         cout << "number of events: " << nevents << endl;
-        float factor = 1./ 2.; //delta y
+        float factor = 1.; //1./ 2.; //delta y
         float factor = factor*1./2.; // (D0+D0bar)/2
         cout << factor << endl;
         factor /= nevents;
