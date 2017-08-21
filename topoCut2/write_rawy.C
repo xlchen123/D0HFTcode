@@ -20,8 +20,8 @@ void write_rawy()
     const float mR_up = 2.1;
     const float YStart = -1.0;
     const float YEnd = 1.0;
-    const float chargeStart = 1;
-    const float chargeEnd = 1;
+    const float chargeStart = -1;
+    const float chargeEnd = -1;
     //read
     TFile* fin = new TFile("../Mixed_Evt.2017Aug16.root");
     
