@@ -39,7 +39,7 @@ void plot_spectra() {
     TGraphErrors* gD0err_xl[ncent];
     TGraphErrors* gD0sys_xl[ncent];
     TF1* fLevy[ncent];
-    TFile* fin1 = new TFile("D0_Spectra_Run14HFT_halfY.root");
+    TFile* fin1 = new TFile("D0_Spectra_Run14HFT_pos.root");
     for(int icent=0; icent<ncent; icent++) {
         gD0err_xl[icent] = (TGraphErrors*)fin1->Get(Form("gD0_err_%s",nameCentXL[icent]));
         gD0sys_xl[icent] = (TGraphErrors*)fin1->Get(Form("gD0_sys_%s",nameCentXL[icent]));
@@ -123,7 +123,7 @@ void plot_spectra() {
         }
     }
     legend1->Draw();
-    drawLatex(0.23,0.28,"D^{0} |Y| < 0.5",22,0.045,1);
+    drawLatex(0.23,0.28,"D^{0} pos |Y| < 1.0",22,0.045,1);
     drawLatex(0.20,0.2,"STAR Au+Au @ 200 GeV",22,0.045,1);
     gPad->SetLogy();
     sprintf(name,"%s/D0_spectra.pdf",dir);
