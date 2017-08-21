@@ -111,7 +111,7 @@ void doPtShift() {
     grint->SetName(Form("flevy_err_band_%s",nameCent1[0]));
     
     // ==== Write
-    TFile* fout = new TFile("D0_Spectra_Run14HFT_pos.root","RECREATE");
+    TFile* fout = new TFile("D0_Spectra_Run14HFT_neg.root","RECREATE");
     gD0_err[0]->SetMarkerColor(1);
     for(int i=0; i<gD0_err[0]->GetN(); i++) gD0_sys[0]->GetX()[i] = gD0_err[0]->GetX()[i];
     fout->cd();

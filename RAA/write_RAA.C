@@ -9,7 +9,7 @@ void write_RAA() {
     //read D0 yield in AuAu
     TGraphErrors* gD0_Run14HFT_err[ncent];
     TGraphErrors* gD0_Run14HFT_sys[ncent];
-    TFile* fin = new TFile("../ptShift/D0_Spectra_Run14HFT_halfY.root");
+    TFile* fin = new TFile("../ptShift/D0_Spectra_Run14HFT_neg.root");
     for(int icent=0; icent<ncent; icent++) {
         gD0_Run14HFT_err[icent] = (TGraphErrors*)fin->Get(Form("gD0_err_%s",nameCent1[icent]));
         gD0_Run14HFT_sys[icent] = (TGraphErrors*)fin->Get(Form("gD0_sys_%s",nameCent1[icent]));
