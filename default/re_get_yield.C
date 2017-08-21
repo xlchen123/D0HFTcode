@@ -50,7 +50,7 @@ void re_get_yield()  //re calculate the default mean value, especially for some 
           y[ipt] = 1./3 * (y1[ipt] + y2[ipt] + y3[ipt] );
           yerr[ipt] = y[ipt] * 1./3. * (y1err[ipt]*1./y1[ipt] + y2err[ipt]*1./y2[ipt]+ y3err[ipt]*1./y3[ipt]);
         }
-        if(icent == 4 && ipt = npt -1 )  //60-80% 6-8GeV data point// 
+        if(icent == 4 && ipt == npt -1 )  //60-80% 6-8GeV data point// 
         {
           y[ipt] = 1./3 * (y1[ipt] + y2[ipt] +  y4[ipt]);
           yerr[ipt] = y[ipt] * 1./3. * (y1err[ipt]*1./y1[ipt] + y2err[ipt]*1./y2[ipt]+ y4err[ipt]*1./y4[ipt]);
