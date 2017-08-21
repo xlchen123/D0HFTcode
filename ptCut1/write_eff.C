@@ -11,15 +11,18 @@ void write_eff() {
     //read hist
     // TFile* fsimuD0 = new TFile("../D0_eff.root"); //D0
     // TFile* fsimuD0 = new TFile("../D0_eff_secondTrack.root"); //D0
-    TFile* fsimuD0 = new TFile("../D0_eff_secondTrack_v3.root"); //D0 Y
+    // TFile* fsimuD0 = new TFile("../D0_eff_secondTrack_v3.root"); //D0 Y
+    TFile* fsimuD0 = new TFile("../D0_eff_pos.root"); //D0 pos
     TH3F* h3Pt_D0 = (TH3F*)fsimuD0->Get("h3PtCentY");
     h3Pt_D0->SetDirectory(0);
     TH3F* h3PtCut_D0 = (TH3F*)fsimuD0->Get("h3PtCentYCut_pt1");
     h3PtCut_D0->SetDirectory(0);
     fsimuD0->Close();
     
-    const float YStart = -0.5;
-    const float YEnd = 0.5;
+    // const float YStart = -0.5;
+    // const float YEnd = 0.5;
+    const float YStart = -1.0;
+    const float YEnd = 1.0;
 
     //Rebin
     int nRebin = 1;

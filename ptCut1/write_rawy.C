@@ -11,13 +11,17 @@ void write_rawy()
     int   ptbin_lw, ptbin_up, mbin_lw, mbin_up, centbin_lw, centbin_up;
     
     const float dauPtCut = 0.3;
-    const float YStart = -0.5;
-    const float YEnd = 0.5;
+    // const float YStart = -0.5;
+    // const float YEnd = 0.5;
     const int   nDugts = 5;
-    const float chargeStart = -1;
-    const float chargeEnd = 1;
+    // const float chargeStart = -1;
+    // const float chargeEnd = 1;
     const float mR_lw = 1.6;
     const float mR_up = 2.1;
+    const float YStart = -1.0;
+    const float YEnd = 1.0;
+    const float chargeStart = 1;
+    const float chargeEnd = 1;
     //read
     TFile* fin = new TFile("../Mixed_Evt.2017Aug16.root");
     
