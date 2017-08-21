@@ -40,15 +40,20 @@ void re_get_yield()  //re calculate the default mean value, especially for some 
       {
         y[ipt] = y1[ipt];
         yerr[ipt] = y1err[ipt];
+        if( icent ==0  && ipt == 0)  //0-10%, 0-0.5GeV data point // average 3 of the data points, sicne the last signal from likesign is less then 3sigma
+        {
+          y[ipt] = 1./2 * (y1[ipt] + y3[ipt] );
+          yerr[ipt] = y[ipt] * 1./2. * (y1err[ipt]*1./y1[ipt] + y3err[ipt]*1./y3[ipt]);
+        }
         if( icent == 1 && ipt == 0)  //10-20%, 0-0.5GeV data point // average all the data point
         {
           y[ipt] = 1./3 * (y1[ipt] + y2[ipt] + y3[ipt]);
           yerr[ipt] = y[ipt] * 1./3. * (y1err[ipt]*1./y1[ipt] + y2err[ipt]*1./y2[ipt]+ y3err[ipt]*1./y3[ipt]);
         }
-        if( icent ==0  && ipt == 0)  //0-10%, 0-0.5GeV data point // average 3 of the data points, sicne the last signal from likesign is less then 3sigma
+        if( icent == 1 && ipt == npt -1)  //10-20%, 6-8GeV data point // average two point
         {
-          y[ipt] = 1./3 * (y1[ipt] + y2[ipt] + y3[ipt] );
-          yerr[ipt] = y[ipt] * 1./3. * (y1err[ipt]*1./y1[ipt] + y2err[ipt]*1./y2[ipt]+ y3err[ipt]*1./y3[ipt]);
+          y[ipt] = 1./2 * (y2[ipt] + y4[ipt]);// check point by point
+          yerr[ipt] = y[ipt] * 1./2. * (y2err[ipt]*1./y2[ipt]+ y4err[ipt]*1./y4[ipt]);
         }
         if(icent == 4 && ipt == npt -1 )  //60-80% 6-8GeV data point// 
         {
