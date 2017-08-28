@@ -211,8 +211,10 @@ void plot_rawy()
             // fD0->SetParLimits(1,1.85,1.88);
             fD0->SetParLimits(2,0.01,0.03);
             fD0->FixParameter(3,hInvMass[ipt]->GetBinWidth(4));
-            // fD0->FixParameter(4,resifunFit->GetParameter(0));
-            // fD0->FixParameter(5,resifunFit->GetParameter(1));
+            fD0->FixParameter(4,resifunFit->GetParameter(0));
+            fD0->FixParameter(5,resifunFit->GetParameter(1));
+            fD0->SetParError(4,resifunFit->GetParError(0));
+            fD0->SetParError(5,resifunFit->GetParError(1));
             hInvMass[ipt]->Fit(fD0,"INOR","",fitRange_lw, fitRange_up);
             hInvMass[ipt]->Fit(fD0,"INOR","",fitRange_lw, fitRange_up);
             //hInvMass[ipt]->Fit(fD0,"INOR","",fitRange_lw, fitRange_up);
@@ -267,7 +269,7 @@ void plot_rawy()
             int N_error = round(yielderr);
             int Nwr = N_y - N_y%10;
             int Nerrwr = N_error - N_error%10;
-            drawLatex(0.55,0.9,Form("RawYield = %i #pm %i",Nwr, Nerrwr),22,0.05,4);
+            drawLatex(0.55,0.9,Form("RawYield = %i #pm %i",N_y, N_error),22,0.05,4);
             //drawLatex(0.55,0.8,Form("RawYield = 810 #pm 130"),22,0.06,4);
             //drawLatex(0.55,0.78,"STAR Preliminary",92,0.05,1);
             //drawLatex(0.55,0.855,Form("S/#sqrt{S+2B}=%.1f",S/sqrt(S+2*B)),22,0.06,4);

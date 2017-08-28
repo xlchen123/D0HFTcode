@@ -1,5 +1,9 @@
 #!/bin/bash
-cd default  # raw yield from gaus+pol1 fit method
+cd vtxCorr  # vtx correction
+rm -rf pic data
+bash run.sh
+
+cd ../default  # raw yield from gaus+pol1 fit method
 rm -rf pic data
 bash run.sh
 
@@ -53,6 +57,7 @@ root -b -q write_err.C
 root -b -q plot_err.C
 
 cd ../ptShift  # do pT shift
+rm -rf pic
 root -b -q doPtShift.C
 root -b -q plot_spectra.C
 
@@ -63,7 +68,9 @@ root -b -q plot_RAA_1.C  # draw each cent
 root -b -q plot_RAA.C    # draw 0-10%, 10-40%, 40-80% together
 
 cd ../Rcp
+rm -rf pic
 root -b -q plot_Rcp.C
+root -b -q plot_Rcp_fit.C
 root -b -q plot_Rcp1_pTshift.C
 root -b -q plot_Rcp2_pTshift.C
 

@@ -1,5 +1,9 @@
 #include "../myFunction.h"
 #include "../myConst.h"
+TF1* ftemp;
+double funMultiplyPt(double* x, double* par) {
+    return ftemp->Eval(x[0]) * 2.* TMath::Pi() * x[0];
+}
 void plot_Rcp_fit() {
     globalSetting();
     char dir[250];
@@ -9,6 +13,7 @@ void plot_Rcp_fit() {
     char CMD[250];
     TLegend* legend;
     TH1F* h0;
+    const float PI = TMath::Pi();
     
     sprintf(dir,"pic");
     sprintf(CMD,"[ -d %s ] || mkdir -p %s",dir,dir);
@@ -19,6 +24,9 @@ void plot_Rcp_fit() {
     const char nameCent[ncent][250] = {"0-10%", "10-20%", "20-40%", "40-60%", "60-80%"};
     const char nameCentXL[ncent][250] = {"0_10", "10_20", "20_40", "40_60", "60_80"};
     float NbinMean[ncent] = {938.80170, 579.89409, 288.35051, 91.37100, 21.37396};
+    
+    const int npt = 11;
+    const double nptbin[npt+1] = { 0., 0.5, 1., 1.5, 2., 2.5, 3., 3.5, 4.0, 5.0, 6.0, 8.0 };//
     
     //Read spectra
     TGraphErrors* gD0err_xl[ncent];
@@ -49,6 +57,29 @@ void plot_Rcp_fit() {
         }
         cout << endl;
     }
+    //calculate Rcp -- integral
+    /*ftemp = (TF1*)fLevy[ncent-1]->Clone("fbaseClone");
+    TF1* fBase = new TF1("fppbaseI",funMultiplyPt,0,10,0);
+    for(int icent=0; icent<ncent; icent++) {
+        cout << nameCent[icent] << endl;
+        for(int ipt=0; ipt<gD0err_xl[0]->GetN(); ipt++) {
+            float pt = gD0err_xl[icent]->GetX()[ipt];
+            float y = gD0err_xl[icent]->GetY()[ipt]/NbinMean[icent];
+            float yErr = gD0err_xl[icent]->GetEY()[ipt]/NbinMean[icent];
+            float ptW = nptbin[ipt+1] - nptbin[ipt];
+            float ptM = (nptbin[ipt+1] + nptbin[ipt])/2.;
+            y = y*ptM*ptW* 2.* TMath::Pi();
+            yErr = yErr*ptM*ptW* 2.* TMath::Pi();
+            float base = fBase->Integral(nptbin[ipt],nptbin[ipt+1])/NbinMean[ncent-1];//gD0err_xl[ncent-1]->GetY()[ipt]/NbinMean[ncent-1];  //60-80%
+            float baseErr = 0;//gD0err_xl[ncent-1]->GetEY()[ipt]/NbinMean[ncent-1];
+            float Rcp = y/base;
+            float RcpErr = Rcp*sqrt(pow(yErr/y,2)+pow(baseErr/base,2));
+            gD0err_xl[icent]->GetY()[ipt] = Rcp;
+            gD0err_xl[icent]->GetEY()[ipt] = RcpErr;
+            cout << gD0err_xl[icent]->GetX()[ipt] << "\t" << Rcp << "\t" << RcpErr << endl;
+        }
+        cout << endl;
+    }*/
     
     //set for plot
     float markerSize = 2.0;

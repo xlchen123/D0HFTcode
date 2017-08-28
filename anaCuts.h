@@ -2,8 +2,14 @@
 const float Nbin[9] = {12.91047, 29.32408, 62.25545, 120.65795, 215.95050, 360.58912, 579.89409, 812.73278, 1042.75372};
 
 //part 2: vertex reso. correction factor
-const float vtxWeight[9] = {0.29, 0.55, 0.77, 0.89, 0.93, 1., 1., 1., 1.};
+//const float vtxWeight[9] = {0.29, 0.55, 0.77, 0.89, 0.93, 1., 1., 1., 1.};
 //const float vtxWeight[9] = {1, 1, 1, 1, 1, 1., 1., 1., 1.};
+const int ncent_vtx = 6;
+const char nameCent_vtx[ncent_vtx][100] = {"70-80%","60-70%","50-60%","40-50%","30-40%","20-30%"};
+const char nameCent_vtx1[ncent_vtx][100] = {"70_80","60_70","50_60","40_50","30_40","20_30"};
+const int ncentAll_vtx = 9;
+const char nameCentAll_vtx[ncentAll_vtx][100] = {"70-80%","60-70%","50-60%","40-50%","30-40%","20-30%","10-20%","5-10%","0-5%"};
+const char nameCentAll_vtx1[ncentAll_vtx][100] = {"70_80","60_70","50_60","40_50","30_40","20_30","10_20","5_0","0_5"};
 
 //part 3: tof match
 //int cent_lw, cent_up;
@@ -51,8 +57,11 @@ float Nbin_Sum[ncent] = {0};
 // double nptbin[npt+1] = {0, 0.5, 1., 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0, 8};
 // const int npt = 13;
 // double nptbin[npt+1] = { 0., 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0, 7.0, 8.0, 10 };
-const int npt = 12;
-double nptbin[npt+1] = { 0., 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0, 7.0, 8.0 };//
+
+//const int npt = 9;
+//const double nptbin[npt+1] = { 0., 0.5, 1., 1.5, 2., 2.5, 3., 4.0, 5.5, 8.0 };//
+const int npt = 11;
+const double nptbin[npt+1] = { 0., 0.5, 1., 1.5, 2., 2.5, 3., 3.5, 4.0, 5.0, 6.0, 8.0 };//
 
 //const int npt = 4;
 //double nptbin[npt+1] = {1.5, 2.5, 3.5, 5, 8};
