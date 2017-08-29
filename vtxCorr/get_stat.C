@@ -119,8 +119,31 @@ void get_stat() {
         //combine cent bin
         for(int icent=0; icent<ncent; icent++) {
             if(i>=centLw[icent]&&i<centUp[icent]) {
-                heffD0[icent]->Add(heffD0_inCent[i],Nbin[i]/Nbin_Sum[icent]);
-                heffBinD0[icent]->Add(heffBinD0_inCent[i],Nbin[i]/Nbin_Sum[icent]);
+                // no correlation
+                //heffD0[icent]->Add(heffD0_inCent[i],Nbin[i]/Nbin_Sum[icent]);
+                //heffBinD0[icent]->Add(heffBinD0_inCent[i],Nbin[i]/Nbin_Sum[icent]);
+                
+                // total correlation
+                for(int ibin=1; ibin<=heffD0[icent]->GetNbinsX(); ibin++) {
+                    float sum = heffD0[icent]->GetBinContent(ibin);
+                    float sumErr = heffD0[icent]->GetBinError(ibin);
+                    float num = heffD0_inCent[i]->GetBinContent(ibin)*Nbin[i]/Nbin_Sum[icent];
+                    float numErr = heffD0_inCent[i]->GetBinError(ibin)*Nbin[i]/Nbin_Sum[icent];
+                    sum += num;
+                    sumErr += numErr;
+                    heffD0[icent]->SetBinContent(ibin,sum);
+                    heffD0[icent]->SetBinError(ibin,sumErr);
+                }
+                for(int ibin=1; ibin<=heffBinD0[icent]->GetNbinsX(); ibin++) {
+                    float sum = heffBinD0[icent]->GetBinContent(ibin);
+                    float sumErr = heffBinD0[icent]->GetBinError(ibin);
+                    float num = heffBinD0_inCent[i]->GetBinContent(ibin)*Nbin[i]/Nbin_Sum[icent];
+                    float numErr = heffBinD0_inCent[i]->GetBinError(ibin)*Nbin[i]/Nbin_Sum[icent];
+                    sum += num;
+                    sumErr += numErr;
+                    heffBinD0[icent]->SetBinContent(ibin,sum);
+                    heffBinD0[icent]->SetBinError(ibin,sumErr);
+                }
             }
         }
     }

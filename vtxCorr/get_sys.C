@@ -84,16 +84,16 @@ void get_sys() {
     
     /////////////////////////  multiply vtx corr ratio  /////////////////////////
     /////////////////////////////////////////////////////////////////////////////
-    // binning
-    //heffBinD0_inCent[icent]->Multiply(hmean[icent]);
     for(int icent=0; icent<9; icent++) {
+        // binning
+        //heffBinD0_inCent[icent]->Multiply(hmean[icent]);
         for(int ibin=1; ibin<=heffBinD0_inCent[icent]->GetNbinsX(); ibin++) {
             float ptCenter = heffBinD0_inCent[icent]->GetBinCenter(ibin);
             int binFind = hmean[icent]->FindBin(ptCenter);
             float R = hmean[icent]->GetBinContent(binFind);
             float Rerr = hmean[icent]->GetBinError(binFind);
             float num = heffBinD0_inCent[icent]->GetBinContent(ibin);
-            float err = heffBinD0_inCent[icent]->GetBinError(ibin);
+            float err = 0;//heffBinD0_inCent[icent]->GetBinError(ibin);
             err = num*R*sqrt(pow(Rerr/R,2)+pow(err/num,2));
             num = num*R;
             heffBinD0_inCent[icent]->SetBinContent(ibin,num);
@@ -106,7 +106,7 @@ void get_sys() {
             float R = hmean[icent]->GetBinContent(binFind);
             float Rerr = hmean[icent]->GetBinError(binFind);
             float num = heffD0_inCent[icent]->GetBinContent(ibin);
-            float err = heffD0_inCent[icent]->GetBinError(ibin);
+            float err = 0;//heffD0_inCent[icent]->GetBinError(ibin);
             err = num*R*sqrt(pow(Rerr/R,2)+pow(err/num,2));
             num = num*R;
             heffD0_inCent[icent]->SetBinContent(ibin,num);
@@ -116,13 +116,37 @@ void get_sys() {
     /////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////
     
+    ////////////////////////////  combine centrality  ///////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
     for(int i=0; i<9; i++) {
         //combine cent bin
         for(int icent=0; icent<ncent; icent++) {
             if(i>=centLw[icent]&&i<centUp[icent]) {
-                heffD0[icent]->Add(heffD0_inCent[i],Nbin[i]/Nbin_Sum[icent]);
-                int bin = heffD0[icent]->FindBin(7);
-                heffBinD0[icent]->Add(heffBinD0_inCent[i],Nbin[i]/Nbin_Sum[icent]);
+                // no correlation
+                //heffD0[icent]->Add(heffD0_inCent[i],Nbin[i]/Nbin_Sum[icent]);
+                //heffBinD0[icent]->Add(heffBinD0_inCent[i],Nbin[i]/Nbin_Sum[icent]);
+                
+                // total correlation
+                for(int ibin=1; ibin<=heffD0[icent]->GetNbinsX(); ibin++) {
+                    float sum = heffD0[icent]->GetBinContent(ibin);
+                    float sumErr = heffD0[icent]->GetBinError(ibin);
+                    float num = heffD0_inCent[i]->GetBinContent(ibin)*Nbin[i]/Nbin_Sum[icent];
+                    float numErr = heffD0_inCent[i]->GetBinError(ibin)*Nbin[i]/Nbin_Sum[icent];
+                    sum += num;
+                    sumErr += numErr;
+                    heffD0[icent]->SetBinContent(ibin,sum);
+                    heffD0[icent]->SetBinError(ibin,sumErr);
+                }
+                for(int ibin=1; ibin<=heffBinD0[icent]->GetNbinsX(); ibin++) {
+                    float sum = heffBinD0[icent]->GetBinContent(ibin);
+                    float sumErr = heffBinD0[icent]->GetBinError(ibin);
+                    float num = heffBinD0_inCent[i]->GetBinContent(ibin)*Nbin[i]/Nbin_Sum[icent];
+                    float numErr = heffBinD0_inCent[i]->GetBinError(ibin)*Nbin[i]/Nbin_Sum[icent];
+                    sum += num;
+                    sumErr += numErr;
+                    heffBinD0[icent]->SetBinContent(ibin,sum);
+                    heffBinD0[icent]->SetBinError(ibin,sumErr);
+                }
             }
         }
     }

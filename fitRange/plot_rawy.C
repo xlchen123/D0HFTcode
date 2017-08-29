@@ -1,8 +1,7 @@
 #include "../myFunction.h"
 #include "../anaCuts.h"
 
-// std::pair<float, float> gMassExclusionRange(1.80, 1.92);
-std::pair<float, float> gMassExclusionRange(1.82, 1.90);
+std::pair<float, float> gMassExclusionRange(1.80, 1.92);
 //std::pair<float, float> gMassYieldCountRange(1.82, 1.91);
 //std::pair<float, float> gMassYieldSideBand1(1.71, 1.80);
 //std::pair<float, float> gMassYieldSideBand2(1.93, 2.02);
@@ -95,10 +94,9 @@ void plot_rawy()
     //resifunFit->SetLineStyle(7);
     resifunFit->SetLineWidth(2);
     fD0->SetParNames("N","#mu","#sigma","BinWidth","A0","A1");
-    // float fitRange_lw = 1.72;
-    float fitRange_lw = 1.76;
-    // float fitRange_up = 2.1;
-    float fitRange_up = 2.0;
+    float fitRange_lw = 1.72;
+    // float fitRange_lw = 1.6;
+    float fitRange_up = 2.1;
     
     for(int icent=0; icent<ncent; icent++) {
 // if(icent != 0) continue;
@@ -144,7 +142,7 @@ void plot_rawy()
             pad1->SetLogy(0);
             hInvMassUL[ipt]->Draw("E");
             setHisto(hInvMassUL[ipt],"","M_{k#pi} (GeV/c^{2})", "Counts (per 10 MeV/c^{2})");
-            hInvMassUL[ipt]->SetMaximum(1.5*hInvMassUL[ipt]->GetMaximum());
+            hInvMassUL[ipt]->SetMaximum(1.8*hInvMassUL[ipt]->GetMaximum());
             hInvMassUL[ipt]->GetXaxis()->SetTitleSize(0.0);
             hInvMassUL[ipt]->GetXaxis()->SetLabelOffset(999);
             hInvMassUL[ipt]->GetXaxis()->SetLabelSize(0.0);
@@ -168,8 +166,8 @@ void plot_rawy()
             //drawLatex(0.15,0.9,"UnLike Sign",22,0.06,1);
             //drawLatex(0.15,0.84,"Like Sign",22,0.06,2);
             drawLatex(0.55,0.9,"STAR Au+Au @ 200 GeV",22,0.05,1);
-            drawLatex(0.55,0.81,Form("%s",nameCent[icent]),22,0.05,4);
-            drawLatex(0.55,0.73,Form("%.1f < p_{T} < %.1f GeV/c",nptbin[ipt],nptbin[ipt+1]),22,0.05,4);
+            drawLatex(0.55,0.84,Form("%s",nameCent[icent]),22,0.05,4);
+            drawLatex(0.55,0.78,Form("%.1f < p_{T} < %.1f GeV/c",nptbin[ipt],nptbin[ipt+1]),22,0.05,4);
             //drawLatex(0.55,0.64,Form("%.3f < DCA_{D^{0}} < %.3f",ndcabin[idca],ndcabin[idca+1]),22,0.06,4);
             //drawLatex(0.55,0.5,"STAR Preliminary",92,0.06,1);
             TLegend* legend2 = new TLegend(0.15,.78,.5,.95);
@@ -213,8 +211,10 @@ void plot_rawy()
             // fD0->SetParLimits(1,1.85,1.88);
             fD0->SetParLimits(2,0.01,0.03);
             fD0->FixParameter(3,hInvMass[ipt]->GetBinWidth(4));
-            // fD0->FixParameter(4,resifunFit->GetParameter(0));
-            // fD0->FixParameter(5,resifunFit->GetParameter(1));
+            //fD0->FixParameter(4,resifunFit->GetParameter(0));
+            //fD0->FixParameter(5,resifunFit->GetParameter(1));
+            fD0->SetParError(4,resifunFit->GetParError(0));
+            fD0->SetParError(5,resifunFit->GetParError(1));
             hInvMass[ipt]->Fit(fD0,"INOR","",fitRange_lw, fitRange_up);
             hInvMass[ipt]->Fit(fD0,"INOR","",fitRange_lw, fitRange_up);
             //hInvMass[ipt]->Fit(fD0,"INOR","",fitRange_lw, fitRange_up);
@@ -269,7 +269,7 @@ void plot_rawy()
             int N_error = round(yielderr);
             int Nwr = N_y - N_y%10;
             int Nerrwr = N_error - N_error%10;
-            drawLatex(0.55,0.9,Form("RawYield = %i #pm %i",Nwr, Nerrwr),22,0.05,4);
+            drawLatex(0.55,0.9,Form("RawYield = %i #pm %i",N_y, N_error),22,0.05,4);
             //drawLatex(0.55,0.8,Form("RawYield = 810 #pm 130"),22,0.06,4);
             //drawLatex(0.55,0.78,"STAR Preliminary",92,0.05,1);
             //drawLatex(0.55,0.855,Form("S/#sqrt{S+2B}=%.1f",S/sqrt(S+2*B)),22,0.06,4);
