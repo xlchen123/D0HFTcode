@@ -33,7 +33,7 @@ void plot_eff()
     //plot eff
     h0 = new TH1F("","",10,0,8);
     setHisto(h0, "", "p_{T} (GeV/c)", "efficiency");
-    h0->GetYaxis()->SetRangeUser(0, 0.04);
+    h0->GetYaxis()->SetRangeUser(0, 0.08);
     h0->GetXaxis()->SetRangeUser(0,8);
     h0->Draw();
     float leg_up = 0.93;
@@ -48,7 +48,7 @@ void plot_eff()
         heffD0[icent]->Draw("esame");
         heffD0[icent]->SetLineColor(COLOR[icent]);
         heffD0[icent]->SetLineWidth(2);
-        heffBinD0[icent]->Draw("esame");
+        //heffBinD0[icent]->Draw("esame");
         heffBinD0[icent]->SetLineColor(COLOR[icent]);
         heffBinD0[icent]->SetLineWidth(2);
         

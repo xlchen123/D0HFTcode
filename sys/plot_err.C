@@ -21,8 +21,8 @@ void plot_err() {
     // const int nerr = 7;
     // const char nameErr[nerr][250] = {"TPC track", "raw yield extract", "single track p_{T}1","single track p_{T}2", "50% topo. eff.", "150% topo. eff.", "double count"};
     
-    const int nerr = 5;
-    const char nameErr[nerr][250] = {"TPC track", "raw yield extract", "single track p_{T}", "50%/150% topo. eff.", "double count"};
+    const int nerr = 6;
+    const char nameErr[nerr][250] = {"TPC track", "raw yield extract", "single track p_{T}", "50%/150% topo. eff.", "double count", "vertex correction"};
     
     float pt_mean[npt], pt_err[npt];
     for(int i=0; i<npt; i++) {
@@ -50,8 +50,9 @@ void plot_err() {
         ierr++;
         
         //sys 2 
-        //-- 2.1 count with fit
+        //-- 2.1 count with side band
         in.open(Form("../count/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No cout sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp1[ipt];
@@ -60,6 +61,7 @@ void plot_err() {
         
         //-- 2.2 count with fit change fit range
         in.open(Form("../fitRange/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No change fit range sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp2[ipt];
@@ -68,6 +70,7 @@ void plot_err() {
 
         //-- 2.3 count with likesign bkg subtraction
         in.open(Form("../likeSign/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No like-sign sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp3[ipt];
@@ -88,6 +91,7 @@ void plot_err() {
         //sys 3, Daughter pt Cut scan // choose the maximum difference
         //sys 3.1 -- daughter pt cut1
         in.open(Form("../ptCut1/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No pt = 0.3 sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp1[ipt];
@@ -96,6 +100,7 @@ void plot_err() {
         
         //sys 3.2 -- daughter pt cut2
         in.open(Form("../ptCut2/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No pt = 0.5 sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp2[ipt];
@@ -116,6 +121,7 @@ void plot_err() {
         //sys 4 topological cut
         //4.1 -- tight topo cuts
         in.open(Form("../topoCut1/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No tight topo sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp1[ipt];
@@ -125,6 +131,7 @@ void plot_err() {
         
         //4.2 -- loose topo cuts
         in.open(Form("../topoCut2/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No loose topo sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp2[ipt];
@@ -132,17 +139,19 @@ void plot_err() {
         in.close();
         
         for(int ipt=0; ipt<npt; ipt++) {
-          tmp[ipt] = tmp1[ipt] > tmp2[ipt] ? tmp1[ipt] : tmp2[ipt];
+           tmp[ipt] = tmp1[ipt] > tmp2[ipt] ? tmp1[ipt] : tmp2[ipt];
           // ysys[ipt] = sqrt(pow(tmp[ipt],2)+pow(ysys[ipt],2));
         }
         
         for(int ipt=0; ipt<npt; ipt++) {
-          sys[icent][ierr][ipt] = tmp[ipt];
+           // sys[icent][ierr][ipt] = tmp[ipt];
+            sys[icent][ierr][ipt] = (tmp1[ipt]+tmp2[ipt])/2.0;
         }
         ierr++;
 
         //sys 5 -- double count
         in.open(Form("../DoubleCount/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No double count sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             float errtmp;
@@ -152,6 +161,32 @@ void plot_err() {
         }
         in.close();
         ierr++;
+        
+        //sys 6 topological cut
+        //4.1 -- vtx sys.
+        in.open(Form("../vtxCorr/data/vtxSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No vtx sys error file!!!" << endl; exit(1);}
+        for(int ipt=0; ipt<npt; ipt++) {
+            if(in.eof()) break;
+            in >> tmp1[ipt];
+            if(icent == 4 && ipt >= npt-3) tmp1[ipt] =0; // for the tight cut, the signal is not good, no need to include this sys for some certain pt bin
+        }
+        in.close();
+        
+        //4.2 -- vtx stat.
+        in.open(Form("../vtxCorr/data/vtxStat_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No vtx sys error file!!!" << endl; exit(1);}
+        for(int ipt=0; ipt<npt; ipt++) {
+            if(in.eof()) break;
+            in >> tmp2[ipt];
+        }
+        in.close();
+        
+        for(int ipt=0; ipt<npt; ipt++) {
+            sys[icent][ierr][ipt] = sqrt(pow(tmp1[ipt],2)+pow(tmp2[ipt],2));
+        }
+        ierr++;
+        
     }
     
     //define sys err graph

@@ -22,7 +22,7 @@ void get_yield() {
             float pt = 0.5*(nptbin[ipt]+nptbin[ipt+1]);
             int bin = heff[icent]->FindBin(pt);
             eff = heff[icent]->GetBinContent(bin);
-            efferr = heff[icent]->GetBinError(bin);
+            efferr = 0;//heff[icent]->GetBinError(bin);
             cout << nameCent[icent] << ", pt: " << nptbin[ipt] << "-" << nptbin[ipt+1] << ", eff error: " << efferr/eff << endl;
             y = rawy[ipt]/eff;
             yerr = y*sqrt(pow(rawyErr[ipt]/rawy[ipt],2)+pow(efferr/eff,2));

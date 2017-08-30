@@ -39,6 +39,7 @@ void write_err() {
         //statistics error
         // in.open(Form("../default/data/yield_%s.txt",nameCent1[icent]));
         in.open(Form("../default/data/re_yield_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No default yield error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) cout << {
                 break;
@@ -55,8 +56,9 @@ void write_err() {
         }
         
         //sys 2 
-        //-- 2.1 count with fit
+        //-- 2.1 count with side band
         in.open(Form("../count/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No cout sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp1[ipt];
@@ -66,6 +68,7 @@ void write_err() {
         
         //-- 2.2 count with fit change fit range
         in.open(Form("../fitRange/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No change fit range sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp2[ipt];
@@ -74,6 +77,7 @@ void write_err() {
 
         //-- 2.3 count with likesign bkg subtraction
         in.open(Form("../likeSign/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No like-sign sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp3[ipt];
@@ -89,6 +93,7 @@ void write_err() {
         //sys 3, Daughter pt Cut scan // choose the maximum difference
         //sys 3.1 -- daughter pt cut1
         in.open(Form("../ptCut1/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No pt = 0.3 sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp1[ipt];
@@ -97,6 +102,7 @@ void write_err() {
         
         //sys 3.2 -- daughter pt cut2
         in.open(Form("../ptCut2/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No pt = 0.5 sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp2[ipt];
@@ -111,6 +117,7 @@ void write_err() {
         //sys 4 topological cut
         //4.1 -- tight topo cuts
         in.open(Form("../topoCut1/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No tight topo sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp1[ipt];
@@ -120,6 +127,7 @@ void write_err() {
         
         //4.2 -- loose topo cuts
         in.open(Form("../topoCut2/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No loose topo sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp2[ipt];
@@ -127,12 +135,14 @@ void write_err() {
         in.close();
         
         for(int ipt=0; ipt<npt; ipt++) {
-          tmp[ipt] = tmp1[ipt] > tmp2[ipt] ? tmp1[ipt] : tmp2[ipt];
+          // tmp[ipt] = tmp1[ipt] > tmp2[ipt] ? tmp1[ipt] : tmp2[ipt];
+            tmp[ipt] = (tmp1[ipt] + tmp2[ipt])/2.0;;
           ysys[ipt] = sqrt(pow(tmp[ipt],2)+pow(ysys[ipt],2));
         }
         
         //sys 5 -- double count
         in.open(Form("../DoubleCount/data/yieldSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No double count sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> yerr[ipt] >> tmp[ipt] >> tmp1[ipt];
@@ -142,7 +152,24 @@ void write_err() {
         in.close();
         
         // do the vertex reso. correction
-        //TFile*
+        // vtx sys. error
+        in.open(Form("../vtxCorr/data/vtxSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No vtx sys error file!!!" << endl; exit(1);}
+        for(int ipt=0; ipt<npt; ipt++) {
+            if(in.eof()) break;
+            in >> tmp[ipt];
+            ysys[ipt] = sqrt(pow(tmp[ipt],2)+pow(ysys[ipt],2));
+        }
+        in.close();
+        // vtx stat. error
+        in.open(Form("../vtxCorr/data/vtxStat_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No vtx sys error file!!!" << endl; exit(1);}
+        for(int ipt=0; ipt<npt; ipt++) {
+            if(in.eof()) break;
+            in >> tmp[ipt];
+            ysys[ipt] = sqrt(pow(tmp[ipt],2)+pow(ysys[ipt],2));
+        }
+        in.close();
         
         //transfer to the dN/Nev2piPtdptdy
         int bin_lw = hcent->FindBin(centLw[icent]+1e-6);
