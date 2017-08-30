@@ -25,8 +25,8 @@ void plot_Rcp_fit1() {
     const char nameCentXL[ncent][250] = {"0_10", "10_20", "20_40", "40_60", "60_80"};
     float NbinMean[ncent] = {938.80170, 579.89409, 288.35051, 91.37100, 21.37396};
     
-    const int npt = 11;
-    const double nptbin[npt+1] = { 0., 0.5, 1., 1.5, 2., 2.5, 3., 3.5, 4.0, 5.0, 6.0, 8.0 };//
+    const int npt = 10;
+    const double nptbin[npt+1] = { 0., 0.5, 1., 1.5, 2., 2.5, 3., 4.0, 5.0, 6.0, 8.0 };//
     
     //Read spectra
     TGraphErrors* gD0err_xl[ncent];
