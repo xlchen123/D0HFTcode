@@ -51,7 +51,7 @@ void write_err() {
         
         //sys 1 -- tpc track
         for(int ipt=0; ipt<npt; ipt++) {
-            ysys[ipt] = sqrt(pow(0.072,2)+pow(ysys[ipt],2));
+            ysys[ipt] = sqrt(pow(0.1,2)+pow(ysys[ipt],2));
             //ysys[ipt] = sqrt(pow(0.04,2)+pow(ysys[ipt],2));
         }
         
