@@ -14,7 +14,11 @@ All Rights Reserved !
 - - -
 ### Presentations:  
 #### STAR Protected:  
-<!-- 1. [sPHENXIX tracker (steal from Tony)](https://github.com/GuannanXie/sPHENIX_FastSimu/blob/master/Slides/2016Sept_sPHENIX_tracking_simulations_Tony.pdf), Tony Frawley, 2016&#45;09&#45;07  -->
+first version of root file without charge and Y 
+/global/homes/x/xgn1992/rnc_Global/SL16dRun14/myAnalysis_AnalysisMeeting_Nov2/MixedEvent_hybrid/hadd/Mixed_Evt.2017Mar23.root
+
+second version of root file with charge and Y 
+/global/homes/x/xgn1992/rnc_Global/SL16dRun14/myAnalysis_AnalysisMeeting_Nov2/MixedEvent_hybrid_V2/hadd/Mixed_Evt.2017Aug16.root
 
 - - -
 
