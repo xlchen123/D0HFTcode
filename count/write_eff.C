@@ -67,20 +67,20 @@ void write_eff() {
     }
     
     // deal with the drop at > 5GeV in cent 70-80%
-    int icent=0;
-    const float ptLW = 5.;
-    int bin_lw = heffD0_inCent[icent]->FindBin(ptLW+1.e-6);
-    int bin_up = heffD0_inCent[icent]->GetNbinsX();
-    for(int ibin=bin_lw; ibin<=bin_up; ibin++) {
-        heffD0_inCent[icent]->SetBinContent(ibin,heffD0_inCent[icent+1]->GetBinContent(ibin));
-        heffD0_inCent[icent]->SetBinError(ibin,heffD0_inCent[icent+1]->GetBinError(ibin));
-    }
-    bin_lw = heffBinD0_inCent[icent]->FindBin(ptLW+1.e-6);
-    bin_up = heffBinD0_inCent[icent]->GetNbinsX();
-    for(int ibin=bin_lw; ibin<=bin_up; ibin++) {
-        heffBinD0_inCent[icent]->SetBinContent(ibin,heffBinD0_inCent[icent+1]->GetBinContent(ibin));
-        heffBinD0_inCent[icent]->SetBinError(ibin,heffBinD0_inCent[icent+1]->GetBinError(ibin));
-    }
+    // int icent=0;
+    // const float ptLW = 5.;
+    // int bin_lw = heffD0_inCent[icent]->FindBin(ptLW+1.e-6);
+    // int bin_up = heffD0_inCent[icent]->GetNbinsX();
+    // for(int ibin=bin_lw; ibin<=bin_up; ibin++) {
+    //     heffD0_inCent[icent]->SetBinContent(ibin,heffD0_inCent[icent+1]->GetBinContent(ibin));
+    //     heffD0_inCent[icent]->SetBinError(ibin,heffD0_inCent[icent+1]->GetBinError(ibin));
+    // }
+    // bin_lw = heffBinD0_inCent[icent]->FindBin(ptLW+1.e-6);
+    // bin_up = heffBinD0_inCent[icent]->GetNbinsX();
+    // for(int ibin=bin_lw; ibin<=bin_up; ibin++) {
+    //     heffBinD0_inCent[icent]->SetBinContent(ibin,heffBinD0_inCent[icent+1]->GetBinContent(ibin));
+    //     heffBinD0_inCent[icent]->SetBinError(ibin,heffBinD0_inCent[icent+1]->GetBinError(ibin));
+    // }
     
     /////////////////////////  multiply vtx corr ratio  /////////////////////////
     /////////////////////////////////////////////////////////////////////////////
