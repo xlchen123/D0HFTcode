@@ -25,7 +25,7 @@ void write_eff() {
     TFile* fsimuD0 = new TFile("../D0_eff_secondTrack.root"); //D0
     TH2F* h2Pt_D0 = (TH2F*)fsimuD0->Get("h2Pt");
     h2Pt_D0->SetDirectory(0);
-    TH2F* h2PtCut_D0 = (TH2F*)fsimuD0->Get("h2PtCut");
+    TH2F* h2PtCut_D0 = (TH2F*)fsimuD0->Get("h2PtCut_pt1");
     h2PtCut_D0->SetDirectory(0);
     fsimuD0->Close();
     
