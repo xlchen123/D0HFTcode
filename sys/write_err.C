@@ -14,7 +14,8 @@ void write_err() {
     }
     
     //read centrality
-    TFile* fin = new TFile("../D0_data_mix.root");
+    // TFile* fin = new TFile("../D0_data_mix.root");
+    TFile* fin = new TFile("../Mixed_Evt.2017Aug16.root");
     TH1F* hcent = (TH1F*)fin->Get("hCentralityWeighted");
     hcent->SetDirectory(0);
     fin->Close();

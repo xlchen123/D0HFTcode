@@ -13,8 +13,14 @@ void write_rawy()
     const float dauPtCut = 0.3;
     const float mR_lw = 1.6;
     const float mR_up = 2.1;
+    const int   nDugts = 5;
+    const float YStart = -1.0;
+    const float YEnd = 1.0;
+    const float chargeStart = 1;
+    const float chargeEnd = 1;
     //read
-    TFile* fin = new TFile("../D0_data_mix.root");
+    // TFile* fin = new TFile("../D0_data_mix.root");
+    TFile* fin = new TFile("../Mixed_Evt.2017Aug16.root");
     THnF* hnmassUL = (THnF*)fin->Get("hD0CentPtEtaMDphiDaug_standard");
     //hnmassUL->SetDirectory(0);
     THnF* hnmassLS = (THnF*)fin->Get("hD0CentPtEtaMDphiDaugLikeSign_standard");
@@ -52,8 +58,12 @@ void write_rawy()
             ptbin_up = hnmassUL->GetAxis(1)->FindBin(nptbin[ipt+1]-1e-6);
             int dau1PtBin = hnmassUL->GetAxis(2)->FindBin(dauPtCut+1e-6);
             int dau2PtBin = hnmassUL->GetAxis(4)->FindBin(dauPtCut+1e-6);
-            int dau1NPtBin = 11;  //11
-            int dau2NPtBin = 11;  //11
+            int dau1NPtBin = nDugts+1;  //11
+            int dau2NPtBin = nDugts+1;  //11
+            int ybin_lw = hnmassUL->GetAxis(5)->FindBin(YStart+1e-6);
+            int ybin_up = hnmassUL->GetAxis(5)->FindBin(YEnd-1e-6);
+            int chargebin_lw = hnmassUL->GetAxis(6)->FindBin(chargeStart+1e-6);
+            int chargebin_up = hnmassUL->GetAxis(6)->FindBin(chargeEnd-1e-6);
             
             cout << "pt bin: " << ptbin_lw << "-" << ptbin_up << ", pt range: " << nptbin[ipt] << "-" << nptbin[ipt+1] << endl;
             
@@ -63,6 +73,8 @@ void write_rawy()
             hnmassUL->GetAxis(1)->SetRange(ptbin_lw,ptbin_up);
             hnmassUL->GetAxis(2)->SetRange(dau1PtBin,dau1NPtBin);
             hnmassUL->GetAxis(4)->SetRange(dau2PtBin,dau2NPtBin);
+            hnmassUL->GetAxis(5)->SetRange(ybin_lw,ybin_up);
+            hnmassUL->GetAxis(6)->SetRange(chargebin_lw,chargebin_up);
             hInvMassUL = (TH1F*)hnmassUL->Projection(3,"E");
             sprintf(name,"hInvMassUL_%i_%i",icent,ipt);
             hInvMassUL->SetName(name);
@@ -82,6 +94,8 @@ void write_rawy()
             hnmassLS->GetAxis(1)->SetRange(ptbin_lw,ptbin_up);
             hnmassLS->GetAxis(2)->SetRange(dau1PtBin,dau1NPtBin);
             hnmassLS->GetAxis(4)->SetRange(dau2PtBin,dau2NPtBin);
+            hnmassLS->GetAxis(5)->SetRange(ybin_lw,ybin_up);
+            hnmassLS->GetAxis(6)->SetRange(chargebin_lw,chargebin_up);
             hInvMassLS = (TH1F*)hnmassLS->Projection(3,"E");
             sprintf(name,"hInvMassLS_%i_%i",icent,ipt);
             hInvMassLS->SetName(name);
@@ -109,6 +123,8 @@ void write_rawy()
             hnmassMixLS->GetAxis(1)->SetRange(ptbin_lw,ptbin_up);
             hnmassMixLS->GetAxis(2)->SetRange(dau1PtBin,dau1NPtBin);
             hnmassMixLS->GetAxis(4)->SetRange(dau2PtBin,dau2NPtBin);
+            hnmassMixLS->GetAxis(5)->SetRange(ybin_lw,ybin_up);
+            hnmassMixLS->GetAxis(6)->SetRange(chargebin_lw,chargebin_up);
             hInvMassMixLS = (TH1F*)hnmassMixLS->Projection(3,"E");
             sprintf(name,"hInvMassMixLS_%i_%i",icent,ipt);
             hInvMassMixLS->SetName(name);
@@ -120,6 +136,8 @@ void write_rawy()
             hnmassMixUL->GetAxis(1)->SetRange(ptbin_lw,ptbin_up);
             hnmassMixUL->GetAxis(2)->SetRange(dau1PtBin,dau1NPtBin);
             hnmassMixUL->GetAxis(4)->SetRange(dau2PtBin,dau2NPtBin);
+            hnmassMixUL->GetAxis(5)->SetRange(ybin_lw,ybin_up);
+            hnmassMixUL->GetAxis(6)->SetRange(chargebin_lw,chargebin_up);
             hInvMassMixUL = (TH1F*)hnmassMixUL->Projection(3,"E");
             sprintf(name,"hInvMassMixUL_%i_%i",icent,ipt);
             hInvMassMixUL->SetName(name);
