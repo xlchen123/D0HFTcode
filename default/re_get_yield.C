@@ -42,8 +42,8 @@ void re_get_yield()  //re calculate the default mean value, especially for some 
         yerr[ipt] = y1err[ipt];
         if( icent == 1 && ipt == 0)  //10-20%, 0-0.5GeV data point // average all the data point
         {
-          y[ipt] = 1./4 * (y1[ipt] + y2[ipt] + y3[ipt] + y4[ipt]);
-          yerr[ipt] = y[ipt] * 1./4. * (y1err[ipt]*1./y1[ipt] + y2err[ipt]*1./y2[ipt]+ y3err[ipt]*1./y3[ipt] + y4err[ipt]*1./y4[ipt]);
+          y[ipt] = 1./3 * (y1[ipt] + y2[ipt] + y3[ipt]);
+          yerr[ipt] = y[ipt] * 1./3. * (y1err[ipt]*1./y1[ipt] + y2err[ipt]*1./y2[ipt]+ y3err[ipt]*1./y3[ipt]);
         }
         if( icent ==0  && ipt == 0)  //0-10%, 0-0.5GeV data point // average 3 of the data points, sicne the last signal from likesign is less then 3sigma
         {
