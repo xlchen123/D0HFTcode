@@ -16,7 +16,7 @@ void write_rawy()
     const int   nDugts = 5;
     const float YStart = -1.0;
     const float YEnd = 1.0;
-    const float chargeStart = 1;
+    const float chargeStart = -1;
     const float chargeEnd = 1;
     //read
     // TFile* fin = new TFile("../D0_data_mix.root");
