@@ -20,6 +20,9 @@ first version of root file without charge and Y
 second version of root file with charge and Y 
 /global/homes/x/xgn1992/rnc_Global/SL16dRun14/myAnalysis_AnalysisMeeting_Nov2/MixedEvent_hybrid_V2/hadd/Mixed_Evt.2017Aug16.root
 
+toyMc efficiency location
+/global/homes/x/xgn1992/rnc_Global/SL16dRun14/myAnalysis_QM17_Jan17/Xiaolong/Redo_0721/efficiency/
+
 - - -
 
 ###How to use this code:  
