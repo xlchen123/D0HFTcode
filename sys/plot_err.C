@@ -30,6 +30,46 @@ void plot_err() {
         pt_err[i] = 0.5*(-nptbin[i] + nptbin[i+1]);
     }
     
+    TFile* fPionEmd = new TFile("../pid_sys/piplus_sys.root");
+    TF1* fpiTpc[ncent];
+    TF1* fpiTpcRcp1[ncent];
+    TF1* fpiTpcRcp2[ncent];
+    for(int icent=0; icent<ncent; icent++) {
+      fpiTpc[icent] = (TF1*)fPionEmd->Get(Form("fCombine3_%s",nameCent1[icent]));
+      fpiTpc[icent] ->SetName(Form("fpiTpc_%s",nameCent1[icent]));
+      fpiTpcRcp1[icent] = (TF1*)fPionEmd->Get(Form("fCombine3Rcp1_%s",nameCent1[icent]));
+      fpiTpcRcp1[icent] ->SetName(Form("fpiTpcRcp1_%s",nameCent1[icent]));
+      fpiTpcRcp2[icent] = (TF1*)fPionEmd->Get(Form("fCombine3Rcp2_%s",nameCent1[icent]));
+      fpiTpcRcp2[icent] ->SetName(Form("fpiTpcRcp2_%s",nameCent1[icent]));
+    }
+    fPionEmd->Close();
+
+    TFile* fKaonEmd = new TFile("../pid_sys/kaonminus_sys.root");
+    TF1* fkTpc[ncent];
+    TF1* fkTpcRcp1[ncent];
+    TF1* fkTpcRcp2[ncent];
+    for(int icent=0; icent<ncent; icent++) {
+      fkTpc[icent] = (TF1*)fKaonEmd->Get(Form("fCombine3_%s",nameCent1[icent]));
+      fkTpc[icent] ->SetName(Form("fkTpc_%s",nameCent1[icent]));
+      fkTpcRcp1[icent] = (TF1*)fKaonEmd->Get(Form("fCombine3Rcp1_%s",nameCent1[icent]));
+      fkTpcRcp1[icent] ->SetName(Form("fkTpcRcp1_%s",nameCent1[icent]));
+      fkTpcRcp2[icent] = (TF1*)fKaonEmd->Get(Form("fCombine3Rcp2_%s",nameCent1[icent]));
+      fkTpcRcp2[icent] ->SetName(Form("fkTpcRcp2_%s",nameCent1[icent]));
+    }
+    fKaonEmd->Close();
+    
+    TFile* filepipid = new TFile("../pid_sys/pion_PidEff_Ks_170822_use_forSys.root");
+    TF1* fpipid;
+    fpipid = (TF1*)filepipid->Get("fpionNsigTof_effratio");
+    fpipid ->SetName(Form("fpipid"));//9.87102992642156396e-01
+    filepipid->Close();
+
+    TFile* filekaonpid = new TFile("../pid_sys/kaon_PidEff_phi_170822_use_forSys.root");
+    TF1* fkpid;
+    fkpid = (TF1*)filekaonpid->Get("fkaonNsigTof_effratio");
+    fkpid ->SetName(Form("fkpid")); // 9.87039958588842303e-01
+    filekaonpid->Close();
+
     // read sys err
     ifstream in;
     float systmp, ytmp;
@@ -42,9 +82,12 @@ void plot_err() {
     for(int icent=0; icent<ncent; icent++) {
         int ierr = 0;
         
+        double TmpCom =  sqrt(pow(fpiTpc[icent]->Eval(1),2) + pow(1.-fpipid->Eval(1),2)) + sqrt(pow(fkTpc[icent]->Eval(1),2) + pow(1.-fkpid->Eval(1),2));
+
         //sys 1 -- tpc track
         for(int ipt=0; ipt<npt; ipt++) {
-            sys[icent][ierr][ipt] = 0.1;
+            sys[icent][ierr][ipt] = TmpCom;
+            // sys[icent][ierr][ipt] = 0.1;
             //ysys[ipt] = sqrt(pow(0.04,2)+pow(ysys[ipt],2));
         }
         ierr++;
@@ -145,7 +188,7 @@ void plot_err() {
         
         for(int ipt=0; ipt<npt; ipt++) {
            // sys[icent][ierr][ipt] = tmp[ipt];
-            sys[icent][ierr][ipt] = (tmp1[ipt]+tmp2[ipt])/2.0;
+           sys[icent][ierr][ipt] = (tmp1[ipt]+tmp2[ipt])/2.0;
         }
         ierr++;
 
@@ -225,7 +268,7 @@ void plot_err() {
         legend->Draw();
         drawLatex(0.18,0.9,Form("AuAu @200GeV  %s",nameCent[icent]),132,0.04,1);
         gPad->SetLogy();
-        sprintf(name,"%s/sysErr_%s.pdf",dir,nameCent1[icent]);
+        sprintf(name,"%s/sysErr_%s_2.pdf",dir,nameCent1[icent]);
         c1->SaveAs(name);
     }
 }
