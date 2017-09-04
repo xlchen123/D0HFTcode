@@ -38,6 +38,16 @@ void plot_Rcp2_pTshift()
    }
    fin1->Close();
 
+   TFile* fin2 = new TFile("../sys/D0_Rcp_Sys.root");
+   TGraphErrors* gD0Rcp1_sys[ncent];
+   TGraphErrors* gD0Rcp2_sys[ncent];
+   for (int icent = 0; icent < ncent; icent++)
+   {
+      gD0Rcp1_sys[icent] = (TGraphErrors*)fin2->Get(Form("gD0Rcp1_sys_%s", nameCentXL[icent]));
+      gD0Rcp2_sys[icent] = (TGraphErrors*)fin2->Get(Form("gD0Rcp2_sys_%s", nameCentXL[icent]));
+   }
+   fin2->Close();
+
    //calculate Rcp
    for (int icent = 0; icent < ncent; icent++)
    {
@@ -52,7 +62,8 @@ void plot_Rcp2_pTshift()
          float baseSys = gD0sys_xl[ncent - 1]->GetEY()[ipt] / NbinMean[ncent - 1];
          float Rcp = y / base;
          float RcpErr = Rcp * sqrt(pow(yErr / y, 2) + pow(baseErr / base, 2));
-         float RcpSys = Rcp * sqrt(pow(ySys / y, 2) + pow(baseSys / base, 2));
+         // float RcpSys = Rcp * sqrt(pow(ySys / y, 2) + pow(baseSys / base, 2));
+         float RcpSys = Rcp * gD0Rcp2_sys[icent]->GetEY()[ipt];
          gD0err_xl[icent]->GetY()[ipt] = Rcp;
          gD0err_xl[icent]->GetEY()[ipt] = RcpErr;
          gD0sys_xl[icent]->GetY()[ipt] = Rcp;
