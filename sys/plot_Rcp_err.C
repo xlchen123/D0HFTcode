@@ -74,6 +74,7 @@ void plot_Rcp_err()
    float yRcp[ncent][npt];
    float yRcp1sys[ncent][nerr][npt];
    float yRcp2sys[ncent][nerr][npt];
+   float vtxSys[ncent][npt];
    float tmp[ncent][npt];
    float tmp1[ncent][npt];
    float tmp2[ncent][npt];
@@ -149,6 +150,20 @@ void plot_Rcp_err()
          if (in.eof()) break;
          in >> y[icent][ipt] >> yerr[icent][ipt] >> tmp[icent][ipt] >> tmp1[icent][ipt];
          y1sys[icent][ipt] = tmp[icent][ipt];
+      }
+      in.close();
+      // do the vertex reso. correction
+      // vtx sys. error
+      in.open(Form("../vtxCorr/data/vtxSys_%s.txt", nameCent1[icent]));
+      if (in.eof())
+      {
+         cout << "No vtx sys error file!!!" << endl;
+         exit(1);
+      }
+      for (int ipt = 0; ipt < npt; ipt++)
+      {
+         if (in.eof()) break;
+         in >> vtxSys[icent][ipt];
       }
       in.close();
    }
@@ -285,19 +300,10 @@ void plot_Rcp_err()
 
       // do the vertex reso. correction
       // vtx sys. error
-      in.open(Form("../vtxCorr/data/vtxSys_%s.txt", nameCent1[icent]));
-      if (in.eof())
-      {
-         cout << "No vtx sys error file!!!" << endl;
-         exit(1);
-      }
       for (int ipt = 0; ipt < npt; ipt++)
       {
-         if (in.eof()) break;
-         in >> tmp[icent][ipt];
-         yRcp1sys[icent][ierr][ipt] = sqrt(pow(tmp[icent][ipt], 2));
+         yRcp1sys[icent][ierr][ipt] = sqrt(pow(vtxSys[icent][ipt], 2)+pow(vtxSys[4][ipt], 2));
       }
-      in.close();
       ierr++;
 
       cout << "ierr = " << ierr << endl;
@@ -476,17 +482,9 @@ void plot_Rcp_err()
 
       // do the vertex reso. correction
       // vtx sys. error
-      in.open(Form("../vtxCorr/data/vtxSys_%s.txt", nameCent1[icent]));
-      if (in.eof())
-      {
-         cout << "No vtx sys error file!!!" << endl;
-         exit(1);
-      }
       for (int ipt = 0; ipt < npt; ipt++)
       {
-         if (in.eof()) break;
-         in >> tmp[icent][ipt];
-         yRcp2sys[icent][ierr][ipt] = sqrt(pow(tmp[icent][ipt], 2));
+         yRcp2sys[icent][ierr][ipt] = sqrt(pow(vtxSys[icent][ipt], 2)+pow(vtxSys[6][ipt], 2));
       }
       in.close();
       ierr++;

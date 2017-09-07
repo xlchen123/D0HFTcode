@@ -57,6 +57,7 @@ void write_Rcp_err() {
     float y[ncent][npt], yerr[ncent][npt], ysys[ncent][npt];
     float y0sys[ncent][npt], y1sys[ncent][npt];
     float yRcp[ncent][npt], yRcp1sys[ncent][npt], yRcp2sys[ncent][npt];
+    float vtxSys[ncent][npt];
     float tmp[ncent][npt];
     float tmp1[ncent][npt];
     float tmp2[ncent][npt];
@@ -68,7 +69,7 @@ void write_Rcp_err() {
     float unit[npt];
     for(int ipt=0; ipt<npt; ipt++)  unit[ipt] = 1.;
 
-    // for yield extraction and double count
+    // for yield extraction and double count and Vtxsys
     for(int icent=0; icent<ncent; icent++) {
         //sys 2 
         //-- 2.1 count with side band
@@ -111,6 +112,17 @@ void write_Rcp_err() {
             if(in.eof()) break;
             in >> y[icent][ipt] >> yerr[icent][ipt] >> tmp[icent][ipt] >> tmp1[icent][ipt];
             y1sys[icent][ipt] = tmp[icent][ipt];
+        }
+        in.close();
+
+        // do the vertex reso. correction
+        // vtx sys. error
+        in.open(Form("../vtxCorr/data/vtxSys_%s.txt",nameCent1[icent]));
+        if(in.eof()) { cout << "No vtx sys error file!!!" << endl; exit(1);}
+        for(int ipt=0; ipt<npt; ipt++) {
+            if(in.eof()) break;
+            in >> vtxSys[icent][ipt];
+            // yRcp1sys[icent][ipt] = sqrt(pow(tmp[icent][ipt],2)+pow(yRcp1sys[icent][ipt],2));
         }
         in.close();
     }
@@ -207,14 +219,10 @@ void write_Rcp_err() {
 
         // do the vertex reso. correction
         // vtx sys. error
-        in.open(Form("../vtxCorr/data/vtxSys_%s.txt",nameCent1[icent]));
-        if(in.eof()) { cout << "No vtx sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
-            if(in.eof()) break;
-            in >> tmp[icent][ipt];
-            yRcp1sys[icent][ipt] = sqrt(pow(tmp[icent][ipt],2)+pow(yRcp1sys[icent][ipt],2));
+            yRcp1sys[icent][ipt] = sqrt(pow(vtxSys[icent][ipt],2)+pow(vtxSys[4][ipt],2)+pow(yRcp1sys[icent][ipt],2));
         }
-        in.close();
+
         // vtx stat. error
         // in.open(Form("../vtxCorr/data/vtxStat_%s.txt",nameCent1[icent]));
         // if(in.eof()) { cout << "No vtx sys error file!!!" << endl; exit(1);}
@@ -334,14 +342,9 @@ void write_Rcp_err() {
 
         // do the vertex reso. correction
         // vtx sys. error
-        in.open(Form("../vtxCorr/data/vtxSys_%s.txt",nameCent1[icent]));
-        if(in.eof()) { cout << "No vtx sys error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
-            if(in.eof()) break;
-            in >> tmp[icent][ipt];
-            yRcp2sys[icent][ipt] = sqrt(pow(tmp[icent][ipt],2)+pow(yRcp2sys[icent][ipt],2));
+            yRcp2sys[icent][ipt] = sqrt(pow(vtxSys[icent][ipt],2)+pow(vtxSys[6][ipt],2)+pow(yRcp2sys[icent][ipt],2));
         }
-        in.close();
         // vtx stat. error
         // in.open(Form("../vtxCorr/data/vtxStat_%s.txt",nameCent1[icent]));
         // if(in.eof()) { cout << "No vtx sys error file!!!" << endl; exit(1);}
