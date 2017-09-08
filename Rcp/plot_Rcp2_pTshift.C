@@ -46,6 +46,8 @@ void plot_Rcp2_pTshift()
       gD0Rcp1_sys[icent] = (TGraphErrors*)fin2->Get(Form("gD0Rcp1_sys_%s", nameCentXL[icent]));
       gD0Rcp2_sys[icent] = (TGraphErrors*)fin2->Get(Form("gD0Rcp2_sys_%s", nameCentXL[icent]));
    }
+   TGraphErrors* gD0Rcp1_sys_vtx = (TGraphErrors*)fin2->Get(Form("gD0Rcp1_sys_vtx_60_80"));
+   TGraphErrors* gD0Rcp2_sys_vtx = (TGraphErrors*)fin2->Get(Form("gD0Rcp2_sys_vtx_40_80"));
    fin2->Close();
 
    //calculate Rcp
@@ -112,6 +114,9 @@ void plot_Rcp2_pTshift()
    legend->SetTextSize(0.04);
    legend->SetTextFont(132);
    //legend->SetHeader("Guannan");
+   gD0Rcp2_sys_vtx->Draw("e3");
+   gD0Rcp2_sys_vtx->SetLineColor(16);
+   gD0Rcp2_sys_vtx->SetFillColor(16);
    const float sysw = 0.15;
    for (int icent = 0; icent < ncent - 1; icent++)
    {
@@ -160,4 +165,5 @@ void plot_Rcp2_pTshift()
       gD0err_xl[icent]->Write(Form("gD0_Rcp_err_%s", nameCentXL[icent]));
       gD0sys_xl[icent]->Write(Form("gD0_Rcp_sys_%s", nameCentXL[icent]));
    }
+   gD0Rcp2_sys_vtx->Write("gD0Rcp1_sys_vtx_60_80");
 }

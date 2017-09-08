@@ -302,7 +302,8 @@ void plot_Rcp_err()
       // vtx sys. error
       for (int ipt = 0; ipt < npt; ipt++)
       {
-         yRcp1sys[icent][ierr][ipt] = sqrt(pow(vtxSys[icent][ipt], 2)+pow(vtxSys[4][ipt], 2));
+         // yRcp1sys[icent][ierr][ipt] = sqrt(pow(vtxSys[icent][ipt], 2)+pow(vtxSys[4][ipt], 2));
+         yRcp1sys[icent][ierr][ipt] = sqrt(pow(vtxSys[icent][ipt], 2));//seperate vtx contribution
       }
       ierr++;
 
@@ -484,7 +485,8 @@ void plot_Rcp_err()
       // vtx sys. error
       for (int ipt = 0; ipt < npt; ipt++)
       {
-         yRcp2sys[icent][ierr][ipt] = sqrt(pow(vtxSys[icent][ipt], 2)+pow(vtxSys[6][ipt], 2));
+         // yRcp2sys[icent][ierr][ipt] = sqrt(pow(vtxSys[icent][ipt], 2)+pow(vtxSys[6][ipt], 2));
+         yRcp2sys[icent][ierr][ipt] = sqrt(pow(vtxSys[icent][ipt], 2));//seperate vtx contribution
       }
       in.close();
       ierr++;

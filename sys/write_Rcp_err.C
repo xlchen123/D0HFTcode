@@ -220,7 +220,8 @@ void write_Rcp_err() {
         // do the vertex reso. correction
         // vtx sys. error
         for(int ipt=0; ipt<npt; ipt++) {
-            yRcp1sys[icent][ipt] = sqrt(pow(vtxSys[icent][ipt],2)+pow(vtxSys[4][ipt],2)+pow(yRcp1sys[icent][ipt],2));
+            // yRcp1sys[icent][ipt] = sqrt(pow(vtxSys[icent][ipt],2)+pow(vtxSys[4][ipt],2)+pow(yRcp1sys[icent][ipt],2));
+            yRcp1sys[icent][ipt] = sqrt(pow(vtxSys[icent][ipt],2)+pow(yRcp1sys[icent][ipt],2));//seperate 60-80% vtx contribution as band
         }
 
         // vtx stat. error
@@ -249,7 +250,15 @@ void write_Rcp_err() {
         gD0Rcpsys->SetMarkerColor(COLOR[icent]);
         gD0Rcpsys->SetTitle(nameCent[icent]);
         gD0Rcpsys->Write(Form("gD0Rcp1_sys_%s",nameCent1[icent]));
+
      }
+
+        TGraphErrors* gD0Rcpsys_vtx = new TGraphErrors(npt, ptmean, unit, 0, vtxSys[4]);
+        gD0Rcpsys_vtx->SetMarkerStyle(MARKERSTYLE[0]);
+        gD0Rcpsys_vtx->SetMarkerSize(2.);
+        gD0Rcpsys_vtx->SetMarkerColor(COLOR[4]);
+        gD0Rcpsys_vtx->SetTitle(nameCent[4]);
+        gD0Rcpsys_vtx->Write(Form("gD0Rcp1_sys_vtx_%s",nameCent1[4]));
 
     //for Rcp2
     for(int icent=0; icent<ncent; icent++) {
@@ -343,7 +352,8 @@ void write_Rcp_err() {
         // do the vertex reso. correction
         // vtx sys. error
         for(int ipt=0; ipt<npt; ipt++) {
-            yRcp2sys[icent][ipt] = sqrt(pow(vtxSys[icent][ipt],2)+pow(vtxSys[6][ipt],2)+pow(yRcp2sys[icent][ipt],2));
+            // yRcp2sys[icent][ipt] = sqrt(pow(vtxSys[icent][ipt],2)+pow(vtxSys[6][ipt],2)+pow(yRcp2sys[icent][ipt],2));
+            yRcp2sys[icent][ipt] = sqrt(pow(vtxSys[icent][ipt],2)+pow(yRcp2sys[icent][ipt],2));//seperate 60-80% vtx contribution as band
         }
         // vtx stat. error
         // in.open(Form("../vtxCorr/data/vtxStat_%s.txt",nameCent1[icent]));
@@ -372,6 +382,13 @@ void write_Rcp_err() {
         gD0Rcpsys->SetTitle(nameCent[icent]);
         gD0Rcpsys->Write(Form("gD0Rcp2_sys_%s",nameCent1[icent]));
      }
+
+        TGraphErrors* gD0Rcpsys_vtx = new TGraphErrors(npt, ptmean, unit, 0, vtxSys[6]);
+        gD0Rcpsys_vtx->SetMarkerStyle(MARKERSTYLE[0]);
+        gD0Rcpsys_vtx->SetMarkerSize(2.);
+        gD0Rcpsys_vtx->SetMarkerColor(COLOR[6]);
+        gD0Rcpsys_vtx->SetTitle(nameCent[6]);
+        gD0Rcpsys_vtx->Write(Form("gD0Rcp2_sys_vtx_%s",nameCent1[6]));
 
     fout->Close();
     
