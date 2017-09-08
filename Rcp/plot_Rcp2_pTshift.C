@@ -165,5 +165,5 @@ void plot_Rcp2_pTshift()
       gD0err_xl[icent]->Write(Form("gD0_Rcp_err_%s", nameCentXL[icent]));
       gD0sys_xl[icent]->Write(Form("gD0_Rcp_sys_%s", nameCentXL[icent]));
    }
-   gD0Rcp2_sys_vtx->Write("gD0Rcp1_sys_vtx_60_80");
+   gD0Rcp2_sys_vtx->Write("gD0Rcp2_sys_vtx_40_80");
 }
