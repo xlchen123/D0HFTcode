@@ -20,7 +20,8 @@ void write_rawy()
     const float chargeEnd = 1;
     //read
     // TFile* fin = new TFile("../D0_data_mix.root");
-    TFile* fin = new TFile("../Mixed_Evt.2017Aug16.root");
+    // TFile* fin = new TFile("../Mixed_Evt.2017Aug16.root");
+    TFile* fin = new TFile("../D0_Data_Mix_MergeUsed.root");
     THnF* hnmassUL = (THnF*)fin->Get("hD0CentPtEtaMDphiDaug_50efficiency");
     //hnmassUL->SetDirectory(0);
     THnF* hnmassLS = (THnF*)fin->Get("hD0CentPtEtaMDphiDaugLikeSign_50efficiency");
