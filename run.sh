@@ -21,6 +21,7 @@ bash run.sh
 
 cd ../default
 root -b -q re_get_yield.C # re calculate the yield for some pt/centrality bin
+root -b -q get_Rcp.C
 
 cd ../count
 root -b -q get_sys.C
@@ -34,18 +35,22 @@ root -b -q get_sys.C
 cd ../ptCut1  # pT>0.6 ==> pT>0.3
 rm -rf pic data
 bash run.sh
+root -b -q get_Rcp.C
 
 cd ../ptCut2  # pT>0.6 ==> pT>0.5
 rm -rf pic data
 bash run.sh
+root -b -q get_Rcp.C
 
 cd ../topoCut1  # tight topo cuts
 rm -rf pic data
 bash run.sh
+root -b -q get_Rcp.C
 
 cd ../topoCut2  # loose topo cuts
 rm -rf pic data
 bash run.sh
+root -b -q get_Rcp.C
 
 cd ../DoubleCount # double count
 rm -rf data
@@ -55,6 +60,8 @@ cd ../sys     # sys error summary
 rm -rf data pic
 root -b -q write_err.C
 root -b -q plot_err.C
+root -b -q write_Rcp_err.C
+root -b -q plot_Rcp_err.C
 
 cd ../ptShift  # do pT shift
 rm -rf pic
