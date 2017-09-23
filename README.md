@@ -20,8 +20,11 @@ first version of root file without charge and Y
 second version of root file with charge and Y 
 /global/homes/x/xgn1992/rnc_Global/SL16dRun14/myAnalysis_AnalysisMeeting_Nov2/MixedEvent_hybrid_V2/hadd/Mixed_Evt.2017Aug16.root
 
+third version of root file with charge and Y and with new Tuned Cuts
+/global/homes/x/xgn1992/rnc_Global/SL16dRun14/myAnalysis_AnalysisMeeting_Nov2/MixedEvent_hybrid_V3/MergeFile/D0_Data_Mix_MergeUsed.root
+
 toyMc efficiency location
-/global/homes/x/xgn1992/rnc_Global/SL16dRun14/myAnalysis_QM17_Jan17/Xiaolong/Redo_0721/efficiency/
+/global/homes/x/xgn1992/rnc_Global/SL16dRun14/myAnalysis_QM17_Jan17/Xiaolong/Redo_0721/efficiency/eff_combine/newTunedCuts
 
 - - -
 
