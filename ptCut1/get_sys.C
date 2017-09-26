@@ -5,7 +5,7 @@ void get_sys() {
     float y[npt], yerr[npt], ybase[npt], yerrbase[npt];
     float sys;
     for(int icent=0; icent<ncent; icent++) {
-        in.open(Form("../default/data/re_yield_%s.txt",nameCent1[icent]));
+        in.open(Form("../default/data/yield_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) in >> ybase[ipt] >> yerrbase[ipt];
         in.close();
         

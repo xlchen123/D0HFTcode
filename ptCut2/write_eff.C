@@ -11,7 +11,7 @@ void write_eff() {
     // read vtx Corr
     TH1D* hmean[ncentAll_vtx];
     TH1D* herr[ncentAll_vtx];
-    TFile* fin = new TFile("../vtxCorr/data/vtxCorr_pt0_3.root");
+    TFile* fin = new TFile("../vtxCorr/data/vtxCorr_default.root");
     for(int icent=0; icent<ncentAll_vtx; icent++) {
         hmean[icent] = (TH1D*)fin->Get(Form("mean_%s",nameCentAll_vtx1[icent]));
         hmean[icent]->SetDirectory(0);

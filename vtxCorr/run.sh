@@ -5,12 +5,10 @@ root -b -q plot_statErr.C
 root -b -q plot_sysErr.C
 root -b -q plot_sysLooseErr.C
 root -b -q plot_sysTightErr.C
-root -b -q plot_sysPtCut1Err.C
 
 root -b -q write_vtxCorr_default.C
 root -b -q write_vtxCorr_loose.C
 root -b -q write_vtxCorr_tight.C
-root -b -q write_vtxCorr_ptCut1.C
 
 root -b -q write_vtxStat.C
 
