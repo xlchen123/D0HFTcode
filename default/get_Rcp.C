@@ -6,7 +6,7 @@ void get_Rcp() {
     float y[ncent][npt], yerr[ncent][npt];
     float Rcp[ncent][npt], Rcperr[ncent][npt];
     for(int icent=0; icent<ncent; icent++) {
-        in.open(Form("data/re_yield_%s.txt",nameCent1[icent]));
+        in.open(Form("data/yield_%s.txt",nameCent1[icent]));
         for(int ipt=0; ipt<npt; ipt++) in >> y[icent][ipt] >> yerr[icent][ipt];
         in.close();
     }

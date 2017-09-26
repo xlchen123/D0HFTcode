@@ -11,33 +11,56 @@ void write_vtxCorr_loose() {
     
     const int nType = 2;
     const char nameDir[nType][100] = {"./out", "./out"};
-    const char nameType[nType][100] = {"loose", "sys_loose"};
+    const char nameType[nType][100] = {"", "_sys"};
     const char nameType1[nType][100] = {"gRef cut 1", "gRef cut 2"};
+    const char nameType2[nType][100] = {"loose", "sys"};
     
-    // read and cal.
-    TH1F* hRatio[nType][ncent_vtx];
-    for(int itype; itype<nType; itype++) {
-        TFile* fin = new TFile(Form("%s/vtxCorr_%s.root",nameDir[itype],nameType[itype]));
-        for(int icent=0; icent<ncent_vtx; icent++) {
-            TH1F* htmpHjCuts = (TH1F*)fin->Get(Form("hptCutsHj_cent%s_%s",nameCent_vtx1[icent],nameType[itype]));
-            TH1F* htmpHjNoCuts = (TH1F*)fin->Get(Form("hptNoCutsHj_cent%s_%s",nameCent_vtx1[icent],nameType[itype]));
-            TH1F* htmpFsCuts = (TH1F*)fin->Get(Form("hptCutsFs_cent%s_%s",nameCent_vtx1[icent],nameType[itype]));
-            TH1F* htmpFsNoCuts = (TH1F*)fin->Get(Form("hptNoCutsFs_cent%s_%s",nameCent_vtx1[icent],nameType[itype]));
+    //read eff from pure hijing
+    TH2F* h2Base_hj[nType];
+    TH2F* h2Eff_hj[nType];
+    for(int i=0; i<nType; i++) {
+        TFile* fin1 = new TFile(Form("%s/effPureHijing%s.root",nameDir,nameType[i]));
+        h2Base_hj[i] = (TH2F*)fin1->Get("h2McPtCent");
+        h2Base_hj[i]->SetDirectory(0);
+        h2Eff_hj[i] = (TH2F*)fin1->Get("h2PtCent_loose_pt1");
+        h2Eff_hj[i]->SetDirectory(0);
+        fin1->Close();
+    }
+    
+    //read eff from fast simu based on hijing
+    TH2F* h2Base_fs[nType];
+    TH2F* h2Eff_fs[nType];
+    for(int i=0; i<nType; i++) {
+        TFile* fin2 = new TFile(Form("%s/eff.FastSimu.Hijing%s.root",nameDir,nameType[i]));
+        h2Base_fs[i] = (TH2F*)fin2->Get("h2McPtCent");
+        h2Base_fs[i]->SetDirectory(0);
+        h2Eff_fs[i] = (TH2F*)fin2->Get("h2PtCent_loose_pt1");
+        h2Eff_fs[i]->SetDirectory(0);
+        fin2->Close();
+    }
+    
+    //calculate eff
+    TH1F* heffHj[nType][ncent_vtx];
+    TH1F* heffFs[nType][ncent_vtx];
+    for(int icent=0; icent<ncent_vtx; icent++) {
+        for(int itype=0; itype<nType; itype++) {
+            TH1F* hbase_hj = (TH1F*)h2Base_hj[itype]->ProjectionX(Form("hbaseHj_%i_%i",icent,itype),icent+1,icent+1)->Rebin(npt,Form("hbaseHjRebin_%i_%i",icent,itype),nptbin);
+            heffHj[itype][icent] = (TH1F*)h2Eff_hj[itype]->ProjectionX(Form("heffHj_%i",icent),icent+1,icent+1)->Rebin(npt,Form("heffHjRebin_%i_%i",icent,itype),nptbin);
+            heffHj[itype][icent]->Divide(hbase_hj);
             
-            // rebin
-            htmpHjCuts = (TH1F*)htmpHjCuts->Rebin(npt,Form("htmpHjCuts_%i_%i",itype,icent),nptbin);
-            htmpHjNoCuts = (TH1F*)htmpHjNoCuts->Rebin(npt,Form("htmpHjNoCuts_%i_%i",itype,icent),nptbin);
-            htmpFsCuts = (TH1F*)htmpFsCuts->Rebin(npt,Form("htmpFsCuts_%i_%i",itype,icent),nptbin);
-            htmpFsNoCuts = (TH1F*)htmpFsNoCuts->Rebin(npt,Form("htmpFsNoCuts_%i_%i",itype,icent),nptbin);
-            
-            htmpHjCuts->Divide(htmpHjNoCuts);
-            htmpFsCuts->Divide(htmpFsNoCuts);
-            
-            htmpHjCuts->Divide(htmpFsCuts);
-            hRatio[itype][icent] = (TH1F*)htmpHjCuts->Clone(Form("hRatio_%i_%i",itype,icent));
-            hRatio[itype][icent]->SetDirectory(0);
+            TH1F* hbase_fs = (TH1F*)h2Base_fs[itype]->ProjectionX(Form("hbaseFs_%i_%i",icent,itype),icent+1,icent+1)->Rebin(npt,Form("hbaseFsRebin_%i_%i",icent,itype),nptbin);
+            heffFs[itype][icent] = (TH1F*)h2Eff_fs[itype]->ProjectionX(Form("heffFs_%i_%i",icent,itype),icent+1,icent+1)->Rebin(npt,Form("heffFsRebin_%i_%i",icent,itype),nptbin);
+            heffFs[itype][icent]->Divide(hbase_fs);
         }
-        fin->Close();
+    }
+    
+    // cal. ratio (fast sim./ pure hij.)
+    TH1F* hRatio[nType][ncent_vtx];
+    for(int icent=0; icent<ncent_vtx; icent++) {
+        for(int itype=0; itype<nType; itype++) {
+            hRatio[itype][icent] = (TH1F*)heffHj[itype][icent]->Clone(Form("hRatio_%i_%i",itype,icent));
+            hRatio[itype][icent]->Divide(heffFs[itype][icent]);
+        }
     }
     
     // cal. correction ratio and its sys error: 30-80%
@@ -97,7 +120,7 @@ void write_vtxCorr_loose() {
     }
     
     // write
-    sprintf(name,"%s/vtxCorr_%s.root",dir,nameType[0]);
+    sprintf(name,"%s/vtxCorr_%s.root",dir,nameType2[0]);
     TFile* fout = new TFile(name,"RECREATE");
     for(int icent=0; icent<ncentAll_vtx; icent++) {
         hmean[icent]->Write();

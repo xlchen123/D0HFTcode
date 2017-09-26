@@ -15,7 +15,7 @@ void write_err() {
     
     //read centrality
     // TFile* fin = new TFile("../D0_data_mix.root");
-    TFile* fin = new TFile("../Mixed_Evt.2017Aug16.root");
+    TFile* fin = new TFile("../D0_Data_Mix_MergeUsed.root");
     TH1F* hcent = (TH1F*)fin->Get("hCentralityWeighted");
     hcent->SetDirectory(0);
     fin->Close();
@@ -79,7 +79,7 @@ void write_err() {
         
         //statistics error
         // in.open(Form("../default/data/yield_%s.txt",nameCent1[icent]));
-        in.open(Form("../default/data/re_yield_%s.txt",nameCent1[icent]));
+        in.open(Form("../default/data/yield_%s.txt",nameCent1[icent]));
         if(in.eof()) { cout << "No default yield error file!!!" << endl; exit(1);}
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) cout << {
@@ -166,7 +166,7 @@ void write_err() {
         for(int ipt=0; ipt<npt; ipt++) {
             if(in.eof()) break;
             in >> y[ipt] >> tmp1[ipt];
-            if(icent == 4 && ipt >= npt-3) tmp1[ipt] =0; // for the tight cut, the signal is not good, no need to include this sys for some certain pt bin
+            //if(icent == 4 && ipt >= npt-3) tmp1[ipt] =0; // for the tight cut, the signal is not good, no need to include this sys for some certain pt bin
         }
         in.close();
         
