@@ -24,7 +24,7 @@ void get_stat() {
     const float YEnd = 1.0;
     // read efficiency  ---begin: see default/write_eff.C
     // TFile* fsimuD0 = new TFile("../D0_eff_secondTrack.root"); //D0
-    TFile* fsimuD0 = new TFile("../D0_eff_combine_newPID.root"); //D0 Y// new PID
+    TFile* fsimuD0 = new TFile("../D0_eff_combine_newPID_newCuts.root"); //D0 Y// new PID
     TH3F* h3Pt_D0 = (TH3F*)fsimuD0->Get("h3PtCentY");
     h3Pt_D0->SetDirectory(0);
     TH3F* h3PtCut_D0 = (TH3F*)fsimuD0->Get("h3PtCentYCut");
