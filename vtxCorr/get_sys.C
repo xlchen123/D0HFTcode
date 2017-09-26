@@ -20,18 +20,21 @@ void get_sys() {
     }
     fin->Close();
     
+    const float YStart = -1.0;
+    const float YEnd = 1.0;
     //read hist
     // TFile* fsimuD0 = new TFile("../D0_eff.root"); //D0
-    TFile* fsimuD0 = new TFile("../D0_eff_secondTrack.root"); //D0
-    TH2F* h2Pt_D0 = (TH2F*)fsimuD0->Get("h2Pt");
-    h2Pt_D0->SetDirectory(0);
-    TH2F* h2PtCut_D0 = (TH2F*)fsimuD0->Get("h2PtCut");
-    h2PtCut_D0->SetDirectory(0);
+    // TFile* fsimuD0 = new TFile("../D0_eff_secondTrack.root"); //D0
+    TFile* fsimuD0 = new TFile("../D0_eff_combine_newPID_newCuts.root"); //D0 Y// new PID
+    TH3F* h3Pt_D0 = (TH3F*)fsimuD0->Get("h3PtCentY");
+    h3Pt_D0->SetDirectory(0);
+    TH3F* h3PtCut_D0 = (TH3F*)fsimuD0->Get("h3PtCentYCut");
+    h3PtCut_D0->SetDirectory(0);
     fsimuD0->Close();
     
     //Rebin
     int nRebin = 1;
-    h2Pt_D0->RebinX(nRebin); h2PtCut_D0->RebinX(nRebin);
+    h3Pt_D0->RebinX(nRebin); h3PtCut_D0->RebinX(nRebin);
     
     //eff in 9 cent bin and cent combined
     TH1F* hpt[9];
@@ -53,8 +56,11 @@ void get_sys() {
     
     for(int i=0; i<9; i++) {
         //
-        hpt[i] = (TH1F*)h2Pt_D0->ProjectionX(Form("hpt_%i",i),i+1,i+1);
-        hptCut[i] = (TH1F*)h2PtCut_D0->ProjectionX(Form("hptCut_%i",i),i+1,i+1);
+        int ybin_lw = h3Pt_D0->GetZaxis()->FindBin(YStart+1e-6);
+        int ybin_up = h3Pt_D0->GetZaxis()->FindBin(YEnd-1e-6);
+
+        hpt[i] = (TH1F*)h3Pt_D0->ProjectionX(Form("hpt_%i",i),i+1,i+1,ybin_lw,ybin_up);
+        hptCut[i] = (TH1F*)h3PtCut_D0->ProjectionX(Form("hptCut_%i",i),i+1,i+1,ybin_lw,ybin_up);
         // bin binning--rebin
         hptBin[i] = (TH1D*)hpt[i]->Rebin(npt,Form("hptBin_%i",i),nptbin);
         hptBinCut[i] = (TH1D*)hptCut[i]->Rebin(npt,Form("hptBinCut_%i",i),nptbin);
