@@ -20,7 +20,7 @@ rm -rf pic data
 bash run.sh
 
 cd ../default
-#root -b -q re_get_yield.C # re calculate the yield for some pt/centrality bin
+root -b -q re_get_yield.C # re calculate the yield for some pt/centrality bin
 root -b -q get_Rcp.C
 
 cd ../count
