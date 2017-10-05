@@ -223,6 +223,17 @@ void plot_effBinning()
             c1->SaveAs(name);
         }
     }
+
+    TFile* fOut = new TFile("Mc_d0Eff_peripher_newCuts.root", "RECREATE");
+    for(int icent=0; icent<ncent_vtx; icent++) {
+        for(int ieff=0; ieff<neff; ieff++) {
+            heffHj[icent][ieff]->Write();
+            heffFs[icent][ieff]->Write();
+            hratio[icent][ieff]->Write();
+        }
+    }
+    fOut->Close();
+    
     
     //delete
     for(int icent=0; icent<ncent_vtx; icent++) {
